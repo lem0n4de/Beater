@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="hello" type="id"/>
+    <item name="starting_dialog" type="id"/>
+    <item name="starting_dialog_button_1" type="id"/>
+    <item name="starting_dialog_button_2" type="id"/>
+    <item name="starting_dialog_title" type="id"/>
+    <item name="starting_dialog_text" type="id"/>
 </resources>
