@@ -66,6 +66,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.0.0-beta01")
     implementation("androidx.core:core-ktx:1.1.0-alpha04")
     implementation("androidx.constraintlayout:constraintlayout:1.1.2")
+    implementation(Libs.Material.components)
+
 
     // JUnit 5 unit test
     testImplementation(Libs.Junit.jupiter_api)
@@ -103,6 +105,7 @@ dependencies {
 
     androidTestImplementation(Libs.AndroidX.runner)
     androidTestImplementation(Libs.AndroidX.espresso_core)
+    androidTestImplementation(Libs.AndroidX.espresso_intents)
     val debugImplementation by configurations
     debugImplementation(Libs.AndroidX.fragment_testing)
 }

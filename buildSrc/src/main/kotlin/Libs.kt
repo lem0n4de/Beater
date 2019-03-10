@@ -5,6 +5,12 @@ object Libs {
         val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
     }
 
+    object Material {
+        private const val version = "1.0.0"
+
+        const val components = "com.google.android.material:material:$version"
+    }
+
     object AndroidX {
         private const val version = "1.1.0"
         private const val rules_version = "1.1.1"
@@ -15,6 +21,7 @@ object Libs {
         const val rules = "androidx.test:rules:$rules_version"
         const val runner = "androidx.test:runner:$rules_version"
         const val espresso_core = "androidx.test.espresso:espresso-core:$espresso_version"
+        const val espresso_intents = "androidx.test.espresso:espresso-intents:$espresso_version"
         const val fragment_testing = "androidx.fragment:fragment-testing:$fragment_version"
     }
 
