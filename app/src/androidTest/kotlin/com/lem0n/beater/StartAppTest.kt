@@ -12,26 +12,20 @@ class StartAppTest {
     fun givenAppIsStarted_showRoleDialog() {
         Screen.onScreen<StartingScreen> {
             dialogTitle {
-                inRoot { isPlatformPopup() }
-                matches { withText(R.string.starting_dialog_title) }
                 matches { isDisplayed() }
             }
 
             dialogText {
-                inRoot { isPlatformPopup() }
-                matches { withText(R.string.starting_dialog_text) }
                 matches { isDisplayed() }
             }
 
             dialogButton1 {
-                inRoot { isDialog() }
                 matches { withText(R.string.role_server) }
                 matches { isClickable() }
                 matches { isDisplayed() }
             }
 
             dialogButton2 {
-                inRoot { isDialog() }
                 matches { withText(R.string.role_client) }
                 matches { isClickable() }
                 matches { isDisplayed() }
