@@ -6,7 +6,7 @@ object Libs {
     }
 
     object Material {
-        private const val version = "1.0.0"
+        private const val version = "1.1.0-alpha04"
 
         const val components = "com.google.android.material:material:$version"
     }
