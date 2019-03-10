@@ -1,8 +1,9 @@
-package com.lem0n.beater
+package com.lem0n.beater.junit5.first_start_test
 
 import com.agoda.kakao.common.views.KView
 import com.agoda.kakao.screen.Screen
 import com.agoda.kakao.text.KButton
+import com.lem0n.beater.R
 
 class StartingScreen : Screen<StartingScreen>() {
     val dialogTitle = KView { withText(R.string.starting_dialog_title) }

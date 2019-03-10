@@ -1,6 +1,8 @@
-package com.lem0n.beater
+package com.lem0n.beater.junit5.first_start_test
 
 import com.agoda.kakao.screen.Screen
+import com.lem0n.beater.MainActivity
+import com.lem0n.beater.R
 import de.mannodermaus.junit5.ActivityTest
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
