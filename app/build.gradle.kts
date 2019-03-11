@@ -1,12 +1,11 @@
-import Libs.Anko.coroutines
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.gradle.dsl.Coroutines
 
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
     id("de.mannodermaus.android-junit5")
+    kotlin("kapt")
 }
 
 tasks.withType(KotlinCompile::class).configureEach {
@@ -63,9 +62,33 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(Libs.Kotlin.stdlib_jdk8)
-    implementation("androidx.appcompat:appcompat:1.0.0-beta01")
-    implementation("androidx.core:core-ktx:1.1.0-alpha04")
-    implementation("androidx.constraintlayout:constraintlayout:1.1.2")
+    implementation(Libs.AndroidX.appcompat)
+    implementation(Libs.AndroidX.core_ktx)
+    implementation(Libs.AndroidX.constraint_layout)
+
+    // Koin Dependency Injection
+     implementation(Libs.Koin.viewmodel)
+     implementation(Libs.Koin.testing)
+
+    // Lifecycle
+    // implementation(Libs.AndroidX.lifecycle_viewmodel_livedata)
+    // kapt(Libs.AndroidX.lifecycle_compiler)
+     implementation(Libs.AndroidX.lifecycle_reactive_streams)
+
+    // ReactiveX
+    implementation(Libs.ReactiveX.rxandroid)
+    implementation(Libs.ReactiveX.rxkotlin)
+    implementation(Libs.ReactiveX.rxjava2)
+
+    // Room
+    implementation(Libs.AndroidX.room_runtime)
+    kapt(Libs.AndroidX.room_compiler)
+    implementation(Libs.AndroidX.room_rxjava2)
+    implementation(Libs.AndroidX.room_coroutines)
+    testImplementation(Libs.AndroidX.room_testing)
+    androidTestImplementation(Libs.AndroidX.room_testing)
+
+    // Material Design
     implementation(Libs.Material.components)
 
 
@@ -103,9 +126,9 @@ dependencies {
 
     implementation(Libs.Anko.commons)
 
-    androidTestImplementation(Libs.AndroidX.runner)
-    androidTestImplementation(Libs.AndroidX.espresso_core)
-    androidTestImplementation(Libs.AndroidX.espresso_intents)
+    androidTestImplementation(Libs.AndroidXTesting.runner)
+    androidTestImplementation(Libs.AndroidXTesting.espresso_core)
+    androidTestImplementation(Libs.AndroidXTesting.espresso_intents)
     val debugImplementation by configurations
-    debugImplementation(Libs.AndroidX.fragment_testing)
+    debugImplementation(Libs.AndroidXTesting.fragment_testing)
 }
