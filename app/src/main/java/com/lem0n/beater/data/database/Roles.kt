@@ -1,5 +1,5 @@
-package com.lem0n.beater.data.database.entity
+package com.lem0n.beater.data.database
 
-enum class Roles(s: String) {
-    SERVER("server"), CLIENT("client")
+enum class Roles {
+    SERVER, CLIENT
 }

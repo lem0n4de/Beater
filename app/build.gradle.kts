@@ -67,8 +67,9 @@ dependencies {
     implementation(Libs.AndroidX.constraint_layout)
 
     // Koin Dependency Injection
-     implementation(Libs.Koin.viewmodel)
-     implementation(Libs.Koin.testing)
+    implementation(Libs.Koin.viewmodel)
+    testImplementation(Libs.Koin.testing)
+    androidTestImplementation(Libs.Koin.testing)
 
     // Lifecycle
     // implementation(Libs.AndroidX.lifecycle_viewmodel_livedata)
