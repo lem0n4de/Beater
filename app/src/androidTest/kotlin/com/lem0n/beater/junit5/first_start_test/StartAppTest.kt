@@ -1,5 +1,6 @@
 package com.lem0n.beater.junit5.first_start_test
 
+import androidx.test.espresso.action.*
 import com.agoda.kakao.screen.Screen
 import com.lem0n.beater.MainActivity
 import com.lem0n.beater.R
@@ -33,6 +34,40 @@ class StartAppTest {
                 matches { withText(R.string.role_server) }
                 matches { isClickable() }
                 matches { isDisplayed() }
+            }
+        }
+    }
+
+    @Test
+    @DisplayName(
+        "When the app is started and a role dialog is shown," +
+                "then the dialog can not be dismissed without selecting" +
+                "one of the options."
+    )
+    fun givenStartDialogIsShown_UserHaveToSelectAnOption() {
+        Screen.onScreen<StartingScreen> {
+            dialogTitle {
+                isDisplayed()
+                perform {
+                    GeneralClickAction(Tap.SINGLE, CoordinatesProvider {
+                        var screenPos = IntArray(2)
+                        it.getLocationOnScreen(screenPos)
+                        val x = screenPos[0] + 300
+                        val y = screenPos[1] - 300
+                        floatArrayOf(x.toFloat(), y.toFloat())
+                    }, Press.FINGER)
+                }
+                isDisplayed()
+            }
+
+            dialogButton1 {
+                isClickable()
+                click()
+                doesNotExist()
+            }
+
+            dialogTitle {
+                doesNotExist()
             }
         }
     }
