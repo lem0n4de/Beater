@@ -14,5 +14,5 @@ interface UserDao {
     fun getUser() : Single<User>
 
     @Delete
-    fun delete(user : User)
+    fun delete(user : User) : Completable
 }

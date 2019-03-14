@@ -120,6 +120,7 @@ object Libs {
     object Mockk {
         private const val version = "1.9"
         val mockk = "io.mockk:mockk:$version"
+        val mockk_instrumentation = "io.mockk:mockk-android:$version"
     }
 }
 

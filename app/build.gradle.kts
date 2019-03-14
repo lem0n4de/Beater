@@ -123,7 +123,9 @@ dependencies {
 
     // Mockk for mocking
     testImplementation(Libs.Mockk.mockk)
-    androidTestImplementation(Libs.Mockk.mockk)
+    androidTestImplementation(Libs.Mockk.mockk_instrumentation) {
+        exclude(group="net.bytebuddy")
+    }
 
     implementation(Libs.Anko.commons)
 
