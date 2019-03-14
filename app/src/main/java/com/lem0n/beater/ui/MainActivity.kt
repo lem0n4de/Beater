@@ -1,10 +1,11 @@
-package com.lem0n.beater
+package com.lem0n.beater.ui
 
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.lem0n.beater.R
 
 class MainActivity : AppCompatActivity() {
     private val logTag = "MainActivity"
