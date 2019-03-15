@@ -8,7 +8,7 @@ import com.agoda.kakao.screen.Screen
 import com.lem0n.beater.R
 import com.lem0n.beater.data.UserRepository
 import com.lem0n.beater.data.database.Roles
-import com.lem0n.beater.ui.MainActivity
+import com.lem0n.beater.MainActivity
 import de.mannodermaus.junit5.ActivityTest
 import io.mockk.coVerify
 import io.mockk.mockk

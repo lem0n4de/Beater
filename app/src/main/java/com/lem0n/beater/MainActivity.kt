@@ -1,4 +1,4 @@
-package com.lem0n.beater.ui
+package com.lem0n.beater
 
 import android.content.DialogInterface
 import android.os.Bundle
