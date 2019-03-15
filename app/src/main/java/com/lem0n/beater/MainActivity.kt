@@ -10,6 +10,7 @@ import com.lem0n.beater.R
 import com.lem0n.beater.client.ClientActivity
 import com.lem0n.beater.data.UserRepository
 import com.lem0n.beater.data.database.Roles
+import com.lem0n.beater.server.ServerActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -43,10 +44,11 @@ class MainActivity : AppCompatActivity() {
             .setNegativeButton(R.string.role_server, { di, int ->
                 if (int == DialogInterface.BUTTON_NEGATIVE) {
                     Log.i(logTag, "Server selected. Starting server activity.")
-                    // TODO Start server activity
                     GlobalScope.launch(Dispatchers.IO) {
                         userRepo.insertUser(Roles.SERVER)
                     }
+                    val intent = Intent(this, ServerActivity::class.java)
+                    startActivity(intent)
                 }
                 di.dismiss()
             })

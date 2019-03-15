@@ -4,15 +4,18 @@ import androidx.test.espresso.action.CoordinatesProvider
 import androidx.test.espresso.action.GeneralClickAction
 import androidx.test.espresso.action.Press
 import androidx.test.espresso.action.Tap
+import androidx.test.espresso.intent.Intents
+import androidx.test.espresso.intent.matcher.IntentMatchers
+import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import com.agoda.kakao.screen.Screen
+import com.lem0n.beater.client.ClientActivity
 import com.lem0n.beater.data.UserRepository
 import com.lem0n.beater.data.database.Roles
 import io.mockk.coVerify
 import io.mockk.mockk
 import org.amshove.kluent.shouldEqual
-import org.amshove.kluent.shouldNotEqual
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -30,6 +33,9 @@ class StartAppTest : KoinTest {
 
     @get:Rule
     val activityTestRule = ActivityTestRule(MainActivity::class.java)
+
+    @get:Rule
+    val intentTestTule = IntentsTestRule(ClientActivity::class.java)
 
     @Before
     fun before() {
@@ -116,6 +122,10 @@ class StartAppTest : KoinTest {
                     it shouldEqual Roles.SERVER
                 })
             }
+
+            Intents.intended(
+                IntentMatchers.hasComponent("com.lem0n.beater.server.ServerActivity")
+            )
         }
     }
 
@@ -129,9 +139,13 @@ class StartAppTest : KoinTest {
 
             coVerify(exactly = 1) {
                 userRepo.insertUser(withArg {
-                    it shouldNotEqual Roles.CLIENT
+                    it shouldEqual Roles.CLIENT
                 })
             }
+
+            Intents.intended(
+                IntentMatchers.hasComponent("com.lem0n.beater.client.ClientActivity")
+            )
         }
     }
 }
