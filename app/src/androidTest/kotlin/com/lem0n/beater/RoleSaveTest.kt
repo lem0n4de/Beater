@@ -1,4 +1,4 @@
-package com.lem0n.beater.junit4
+package com.lem0n.beater
 
 
 import android.content.Context

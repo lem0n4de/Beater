@@ -23,17 +23,6 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunnerArgument("runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder")
-    }
-    flavorDimensions("full")
-    productFlavors {
-        create("experimental") {
-            minSdkVersion(26)
-            dimension = "full"
-        }
-        create("normal") {
-            dimension = "full"
-        }
     }
     sourceSets?.forEach {
         it.java.srcDir("src/${it.name}/kotlin")
@@ -72,8 +61,6 @@ dependencies {
     androidTestImplementation(Libs.Koin.testing)
 
     // Lifecycle
-    // implementation(Libs.AndroidX.lifecycle_viewmodel_livedata)
-    // kapt(Libs.AndroidX.lifecycle_compiler)
     implementation(Libs.AndroidX.lifecycle_reactive_streams)
 
     // ReactiveX
@@ -98,18 +85,10 @@ dependencies {
     testRuntimeOnly(Libs.Junit.jupiter_engine)
     testRuntimeOnly(Libs.Junit.jupiter_vintage)
 
-    val androidTestExperimentalImplementation by configurations
-    val androidTestExperimentalRuntimeOnly by configurations
-
-    // JUnit 5 integration tests
-    androidTestExperimentalImplementation(Libs.Junit.jupiter_api)
-    androidTestExperimentalImplementation(Libs.AndroidJUnit5.instrumentation)
-    androidTestExperimentalRuntimeOnly(Libs.Junit.jupiter_engine)
-    androidTestExperimentalRuntimeOnly(Libs.Junit.platform)
-    androidTestExperimentalRuntimeOnly(Libs.AndroidJUnit5.runner)
+    androidTestImplementation(Libs.Junit.junit4)
 
     // Kakao for easier Espresso usage
-    androidTestExperimentalImplementation(Libs.Kakao.kakao)
+    androidTestImplementation(Libs.Kakao.kakao)
 
     // Spek
     testImplementation(Libs.Spek.spek)

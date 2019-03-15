@@ -1,34 +1,37 @@
-package com.lem0n.beater.junit5.first_start_test
+package com.lem0n.beater
 
 import androidx.test.espresso.action.CoordinatesProvider
 import androidx.test.espresso.action.GeneralClickAction
 import androidx.test.espresso.action.Press
 import androidx.test.espresso.action.Tap
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import com.agoda.kakao.screen.Screen
-import com.lem0n.beater.R
 import com.lem0n.beater.data.UserRepository
 import com.lem0n.beater.data.database.Roles
-import com.lem0n.beater.MainActivity
-import de.mannodermaus.junit5.ActivityTest
 import io.mockk.coVerify
 import io.mockk.mockk
 import org.amshove.kluent.shouldEqual
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.api.Test
+import org.amshove.kluent.shouldNotEqual
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.dsl.module
 import org.koin.test.KoinTest
 import org.koin.test.inject
 
-@ActivityTest(MainActivity::class)
+@RunWith(AndroidJUnit4::class)
 class StartAppTest : KoinTest {
-
     val userRepo : UserRepository by inject()
 
-    @BeforeEach
+    @get:Rule
+    val activityTestRule = ActivityTestRule(MainActivity::class.java)
+
+    @Before
     fun before() {
         startKoin {
             modules(
@@ -39,15 +42,13 @@ class StartAppTest : KoinTest {
         }
     }
 
-    @AfterEach
+    @After
     fun after() {
         stopKoin()
     }
 
     @Test
-    @DisplayName(
-        "When the app is started for the first time, " +
-                "show a dialog that makes user pick a role.")
+    @Throws(Exception::class)
     fun givenAppIsStarted_showRoleDialog() {
         Screen.onScreen<StartingScreen> {
             dialogTitle {
@@ -73,11 +74,7 @@ class StartAppTest : KoinTest {
     }
 
     @Test
-    @DisplayName(
-        "When the app is started and a role dialog is shown," +
-                "then the dialog can not be dismissed without selecting" +
-                "one of the options."
-    )
+    @Throws(Exception::class)
     fun givenStartDialogIsShown_UserHaveToSelectAnOption() {
         Screen.onScreen<StartingScreen> {
             dialogTitle {
@@ -107,8 +104,7 @@ class StartAppTest : KoinTest {
     }
 
     @Test
-    @DisplayName("Given server button is pressed, " +
-            "save the value to database.")
+    @Throws(Exception::class)
     fun givenServerButtonPressed_saveValue() {
         Screen.onScreen<StartingScreen> {
             dialogButton2 {
@@ -124,8 +120,7 @@ class StartAppTest : KoinTest {
     }
 
     @Test
-    @DisplayName("Given client button is pressed, " +
-            "save the value to database.")
+    @Throws(Exception::class)
     fun givenClientButtonPressed_saveValue() {
         Screen.onScreen<StartingScreen> {
             dialogButton1 {
@@ -134,7 +129,7 @@ class StartAppTest : KoinTest {
 
             coVerify(exactly = 1) {
                 userRepo.insertUser(withArg {
-                    it shouldEqual Roles.CLIENT
+                    it shouldNotEqual Roles.CLIENT
                 })
             }
         }
