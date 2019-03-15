@@ -10,6 +10,11 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <service
+                android:name=".client.ClientService"
+                android:enabled="true"
+                android:exported="false">
+        </service>
+        <service
                 android:name=".server.ServerService"
                 android:enabled="true"
                 android:exported="false">
