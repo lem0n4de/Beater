@@ -74,7 +74,7 @@ dependencies {
     // Lifecycle
     // implementation(Libs.AndroidX.lifecycle_viewmodel_livedata)
     // kapt(Libs.AndroidX.lifecycle_compiler)
-     implementation(Libs.AndroidX.lifecycle_reactive_streams)
+    implementation(Libs.AndroidX.lifecycle_reactive_streams)
 
     // ReactiveX
     implementation(Libs.ReactiveX.rxandroid)
@@ -92,7 +92,6 @@ dependencies {
     // Material Design
     implementation(Libs.Material.components)
 
-
     // JUnit 5 unit test
     testImplementation(Libs.Junit.jupiter_api)
     testImplementation(Libs.Junit.junit4)
@@ -101,7 +100,7 @@ dependencies {
 
     val androidTestExperimentalImplementation by configurations
     val androidTestExperimentalRuntimeOnly by configurations
-    
+
     // JUnit 5 integration tests
     androidTestExperimentalImplementation(Libs.Junit.jupiter_api)
     androidTestExperimentalImplementation(Libs.AndroidJUnit5.instrumentation)
@@ -124,7 +123,7 @@ dependencies {
     // Mockk for mocking
     testImplementation(Libs.Mockk.mockk)
     androidTestImplementation(Libs.Mockk.mockk_instrumentation) {
-        exclude(group="net.bytebuddy")
+        exclude(group = "net.bytebuddy")
     }
 
     implementation(Libs.Anko.commons)
