@@ -1,11 +1,13 @@
 package com.lem0n.beater
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.lem0n.beater.R
+import com.lem0n.beater.client.ClientActivity
 import com.lem0n.beater.data.UserRepository
 import com.lem0n.beater.data.database.Roles
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +35,8 @@ class MainActivity : AppCompatActivity() {
                     GlobalScope.launch(Dispatchers.IO) {
                         userRepo.insertUser(Roles.CLIENT)
                     }
+                    val intent = Intent(this, ClientActivity::class.java)
+                    startActivity(intent)
                 }
                 di.dismiss()
             })
