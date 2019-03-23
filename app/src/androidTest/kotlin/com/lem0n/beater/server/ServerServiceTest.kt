@@ -1,16 +1,11 @@
-package com.lem0n.beater
+package com.lem0n.beater.server
 
 import android.content.Intent
 import android.os.IBinder
-import android.os.Message
 import android.os.Messenger
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.filters.MediumTest
 import androidx.test.rule.ServiceTestRule
-import com.lem0n.beater.server.ServerService
-import com.lem0n.beater.server.getServerService
-import io.mockk.every
-import io.mockk.mockk
 import org.amshove.kluent.*
 import org.junit.*
 
