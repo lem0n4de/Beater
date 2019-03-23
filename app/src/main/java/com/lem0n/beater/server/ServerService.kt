@@ -4,7 +4,9 @@ import android.app.Service
 import android.content.Intent
 import android.os.*
 import androidx.annotation.RestrictTo
+import com.lem0n.beater.BuildConfig
 import com.lem0n.beater.MessagesContract
+import timber.log.Timber
 
 @RestrictTo(RestrictTo.Scope.TESTS)
 var service : ServerService? = null
@@ -37,8 +39,17 @@ class ServerService : Service() {
     }
 
     override fun onBind(intent: Intent): IBinder {
-        service = this@ServerService
+        if (BuildConfig.DEBUG) {
+            service = this@ServerService
+        }
         return messenger.binder
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        if(BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 }
 
