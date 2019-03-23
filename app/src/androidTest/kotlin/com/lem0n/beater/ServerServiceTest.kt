@@ -46,13 +46,14 @@ class ServerServiceTest {
     }
 
     @Test
-    fun registersClientsAccordingly() {
+    fun registersAndUnregistersClientsSuccessfully() {
         // clientList should be empty at first
-        service!!.clientList shouldEqual ArrayList<Messenger>()
+        val myMessenger = serviceMessenger!!
+        service!!.clientList shouldNotContain myMessenger
+        service!!.registerClient(myMessenger)
+        service!!.clientList shouldContain myMessenger
 
-        val myMesenger = serviceMessenger!!
-        service!!.registerClient(myMesenger)
-
-        service!!.clientList shouldContain myMesenger
+        service!!.unregisterClient(myMessenger)
+        service!!.clientList shouldNotContain myMessenger
     }
 }

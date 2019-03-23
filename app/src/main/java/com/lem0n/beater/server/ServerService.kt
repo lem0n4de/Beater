@@ -20,13 +20,20 @@ class ServerService : Service() {
                     MessagesContract.REGISTER_CLIENT -> {
                         registerClient(msg.replyTo)
                     }
+                    MessagesContract.UNREGISTER_CLIENT -> {
+                        unregisterClient(msg.replyTo)
+                    }
                 }
             }
         }
     }
 
-    fun registerClient(messenger: Messenger) {
+    internal fun registerClient(messenger: Messenger) {
         clientList.add(messenger)
+    }
+
+    internal fun unregisterClient(messenger : Messenger) {
+        clientList.remove(messenger)
     }
 
     override fun onBind(intent: Intent): IBinder {
