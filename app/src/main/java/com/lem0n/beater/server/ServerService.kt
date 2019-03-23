@@ -4,7 +4,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.*
 import androidx.annotation.RestrictTo
-import com.lem0n.beater.Messages
+import com.lem0n.beater.MessagesContract
 
 @RestrictTo(RestrictTo.Scope.TESTS)
 var service : ServerService? = null
@@ -17,7 +17,7 @@ class ServerService : Service() {
         override fun handleMessage(msg: Message?) {
             if (msg != null) {
                 when (msg.what) {
-                    Messages.REGISTER_CLIENT -> {
+                    MessagesContract.REGISTER_CLIENT -> {
                         registerClient(msg.replyTo)
                     }
                 }

@@ -9,7 +9,7 @@ import android.content.ServiceConnection
 import android.os.*
 import androidx.appcompat.app.AppCompatActivity
 import com.lem0n.beater.BuildConfig
-import com.lem0n.beater.Messages
+import com.lem0n.beater.MessagesContract
 import timber.log.Timber
 import java.io.IOException
 
@@ -52,7 +52,7 @@ open class BaseServiceActivity : AppCompatActivity() {
             Timber.i("Connected to service.")
 
             try {
-                val msg = Message.obtain(null, Messages.REGISTER_CLIENT).apply {
+                val msg = Message.obtain(null, MessagesContract.REGISTER_CLIENT).apply {
                     replyTo = messengerForService
                 }
                 messengerToService!!.send(msg)
