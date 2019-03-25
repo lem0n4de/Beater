@@ -54,6 +54,7 @@ object Libs {
         private const val rules_version = "1.1.1"
         private const val espresso_version = "3.1.0"
         private const val fragment_version = "1.1.0-alpha04"
+        private const val uiautomator_version = "2.2.0"
 
         const val core = "androidx.test:core:$version"
         const val rules = "androidx.test:rules:$rules_version"
@@ -61,6 +62,7 @@ object Libs {
         const val espresso_core = "androidx.test.espresso:espresso-core:$espresso_version"
         const val espresso_intents = "androidx.test.espresso:espresso-intents:$espresso_version"
         const val fragment_testing = "androidx.fragment:fragment-testing:$fragment_version"
+        const val uiautomator = "androidx.test.uiautomator:uiautomator:$uiautomator_version"
     }
 
     object Anko {

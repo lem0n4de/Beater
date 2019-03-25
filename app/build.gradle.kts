@@ -111,6 +111,7 @@ dependencies {
     androidTestImplementation(Libs.AndroidXTesting.runner)
     androidTestImplementation(Libs.AndroidXTesting.espresso_core)
     androidTestImplementation(Libs.AndroidXTesting.espresso_intents)
+    androidTestImplementation(Libs.AndroidXTesting.uiautomator)
     val debugImplementation by configurations
     debugImplementation(Libs.AndroidXTesting.fragment_testing)
 }
