@@ -81,11 +81,4 @@ open class BaseServiceActivity : AppCompatActivity() {
         unbindService(serviceConnection)
         bound = false
     }
-
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
-    }
 }

@@ -6,6 +6,7 @@ import com.lem0n.beater.data.UserRepositoryImpl
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import timber.log.Timber
 
 class MainApplication : Application() {
     val appModule = module {
@@ -17,6 +18,9 @@ class MainApplication : Application() {
         startKoin {
             androidLogger()
             modules(appModule)
+        }
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
         }
     }
 }
