@@ -18,14 +18,14 @@ open class BaseServiceActivity : AppCompatActivity() {
     /**
      * This is a class for handling arbitrary messages from service.
      */
-    open fun handlerFunction() {}
+    open fun handlerFunction(msg : Message) {
+        throw NotImplementedError()
+    }
 
     private inner class ServiceMessageHandler : Handler() {
         override fun handleMessage(msg: Message?) {
             if (msg != null) {
-                when (msg.what) {
-                    else -> handlerFunction()
-                }
+                handlerFunction(msg)
             }
         }
     }
@@ -69,7 +69,7 @@ open class BaseServiceActivity : AppCompatActivity() {
         }
     }
 
-    fun bindToService(serviceClass : Class<Service>) {
+    fun bindToService(serviceClass : Class<out Service>) {
         Timber.d("Bind to service with class ${serviceClass.simpleName}")
         Intent(this, serviceClass).also { intent ->
             bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
