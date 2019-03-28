@@ -63,13 +63,6 @@ class ServerService : Service() {
         return messenger.binder
     }
 
-    override fun onCreate() {
-        super.onCreate()
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
-    }
-
     fun resetState() {
         Timber.i("Resetting server serverState.")
         if (serverState == STATE_LISTENING) {
