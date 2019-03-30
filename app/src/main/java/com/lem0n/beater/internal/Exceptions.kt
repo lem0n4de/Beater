@@ -14,3 +14,5 @@ class DeleteUserException(private val msg : String? = null) : Exception() {
     override val message : String?
         get() = msg
 }
+
+class DeviceNotFoundException : Exception()
