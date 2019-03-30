@@ -10,6 +10,9 @@ import androidx.annotation.RestrictTo
 import com.lem0n.beater.BuildConfig
 import com.lem0n.beater.MessagesContract
 import com.lem0n.beater.internal.Config
+import com.lem0n.beater.internal.EventBus.IEventBus
+import com.lem0n.beater.internal.EventBus.onReceivedConnection
+import org.koin.android.ext.android.inject
 import timber.log.Timber
 
 @RestrictTo(RestrictTo.Scope.TESTS)
@@ -18,6 +21,8 @@ var service: ServerService? = null
 class ServerService : Service() {
     internal var clientList: ArrayList<Messenger> = ArrayList()
     internal val messenger by lazy { Messenger(ActivityHandler()) }
+
+    private val bus : IEventBus by inject()
 
     companion object {
         private const val STATE_NONE = 0
@@ -115,6 +120,7 @@ class ServerService : Service() {
         try {
             connectedThread?.start()
             serverState = STATE_CONNECTED
+            bus.publish(onReceivedConnection(socket.remoteDevice.name))
         } catch (e: Exception) {
             Timber.e(e, "Connected thread couldn't be started.")
         }
