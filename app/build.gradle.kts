@@ -55,6 +55,7 @@ dependencies {
     implementation(Libs.AndroidX.core_ktx)
     implementation(Libs.AndroidX.constraint_layout)
     implementation("com.jakewharton.timber:timber:4.7.1")
+    implementation(project(":base"))
 
     // Koin Dependency Injection
     implementation(Libs.Koin.viewmodel)

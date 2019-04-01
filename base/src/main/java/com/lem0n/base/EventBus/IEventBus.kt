@@ -1,4 +1,4 @@
-package com.lem0n.beater.internal.EventBus
+package com.lem0n.base.EventBus
 
 import io.reactivex.Observable
 

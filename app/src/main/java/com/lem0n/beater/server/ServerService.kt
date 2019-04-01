@@ -10,8 +10,8 @@ import androidx.annotation.RestrictTo
 import com.lem0n.beater.BuildConfig
 import com.lem0n.beater.MessagesContract
 import com.lem0n.beater.internal.Config
-import com.lem0n.beater.internal.EventBus.IEventBus
-import com.lem0n.beater.internal.EventBus.onReceivedConnection
+import com.lem0n.base.EventBus.IEventBus
+import com.lem0n.base.EventBus.onReceivedConnection
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 

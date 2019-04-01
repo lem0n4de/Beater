@@ -5,8 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.lem0n.beater.R
-import com.lem0n.beater.internal.EventBus.IEventBus
-import com.lem0n.beater.internal.EventBus.onConnectionSuccessful
+import com.lem0n.base.EventBus.IEventBus
+import com.lem0n.base.EventBus.onConnectionSuccessful
 import org.koin.android.ext.android.inject
 
 @SuppressLint("CheckResult")
@@ -18,7 +18,7 @@ class ClientActivity : AppCompatActivity() {
         setContentView(R.layout.activity_client)
 
         bus.listen(onConnectionSuccessful::class.java).subscribe {
-            // TODO 
+            // TODO
         }
 
         Intent(this, ClientService::class.java).also {
