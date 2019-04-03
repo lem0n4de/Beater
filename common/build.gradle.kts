@@ -2,6 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.library")
+    kotlin("android")
+    kotlin("android.extensions")
     kotlin("kapt")
 }
 
@@ -45,6 +47,7 @@ dependencies {
     implementation(Libs.ReactiveX.rxandroid)
     implementation(Libs.ReactiveX.rxkotlin)
     implementation(Libs.ReactiveX.rxjava2)
+    api(Libs.Koin.viewmodel)
     testImplementation("junit:junit:4.12")
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")

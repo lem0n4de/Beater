@@ -10,8 +10,9 @@ import androidx.annotation.RestrictTo
 import com.lem0n.beater.BuildConfig
 import com.lem0n.beater.MessagesContract
 import com.lem0n.beater.internal.Config
-import com.lem0n.base.EventBus.IEventBus
-import com.lem0n.base.EventBus.onReceivedConnection
+import com.lem0n.common.EventBus.IEventBus
+import com.lem0n.common.EventBus.onReceivedConnection
+import com.lem0n.common.Receivers.ServerReceiver
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
@@ -23,6 +24,7 @@ class ServerService : Service() {
     internal val messenger by lazy { Messenger(ActivityHandler()) }
 
     private val bus : IEventBus by inject()
+    private val serverReceiver : ServerReceiver by inject()
 
     companion object {
         private const val STATE_NONE = 0
@@ -161,7 +163,7 @@ class ServerService : Service() {
         private var buffer = ByteArray(1024)
 
         override fun run() {
-            var bytes: Int
+            var bytes: Int = 0
             Timber.d("Started ConnectedThread.")
             while (true) {
                 try {
@@ -170,10 +172,11 @@ class ServerService : Service() {
                 } catch (e: Exception) {
                     Timber.e(e, "Input stream disconnected.")
                     resetAndListen()
+                    break
                 }
             }
 
-            // TODO Receive message and return feedback
+            serverReceiver.receive(buffer, bytes)
         }
 
 

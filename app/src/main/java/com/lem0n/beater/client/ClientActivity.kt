@@ -5,8 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.lem0n.beater.R
-import com.lem0n.base.EventBus.IEventBus
-import com.lem0n.base.EventBus.onConnectionSuccessful
+import com.lem0n.common.EventBus.IEventBus
+import com.lem0n.common.EventBus.onConnectionSuccessful
 import org.koin.android.ext.android.inject
 
 @SuppressLint("CheckResult")

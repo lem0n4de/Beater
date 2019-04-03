@@ -1,4 +1,4 @@
-package com.lem0n.base;
+package com.lem0n.common;
 
 import org.junit.Test;
 

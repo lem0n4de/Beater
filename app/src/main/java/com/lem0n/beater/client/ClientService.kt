@@ -6,8 +6,8 @@ import android.bluetooth.BluetoothDevice
 import android.content.Intent
 import android.os.IBinder
 import com.lem0n.beater.internal.DeviceNotFoundException
-import com.lem0n.base.EventBus.IEventBus
-import com.lem0n.base.EventBus.onConnectionLost
+import com.lem0n.common.EventBus.IEventBus
+import com.lem0n.common.EventBus.onConnectionLost
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 

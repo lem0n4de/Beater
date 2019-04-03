@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.os.Message
 import com.lem0n.beater.R
 import com.lem0n.beater.internal.BaseServiceActivity
-import com.lem0n.base.EventBus.IEventBus
-import com.lem0n.base.EventBus.onReceivedConnection
+import com.lem0n.common.EventBus.IEventBus
+import com.lem0n.common.EventBus.onReceivedConnection
 import kotlinx.android.synthetic.main.activity_server.*
 import org.koin.android.ext.android.inject
 

@@ -11,6 +11,7 @@ plugins {
 tasks.withType(KotlinCompile::class).configureEach {
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs = listOf("-Xallow-result-return-type")
     }
 }
 
@@ -55,10 +56,9 @@ dependencies {
     implementation(Libs.AndroidX.core_ktx)
     implementation(Libs.AndroidX.constraint_layout)
     implementation("com.jakewharton.timber:timber:4.7.1")
-    implementation(project(":base"))
+    implementation(project(":common"))
 
     // Koin Dependency Injection
-    implementation(Libs.Koin.viewmodel)
     testImplementation(Libs.Koin.testing)
     androidTestImplementation(Libs.Koin.testing)
 

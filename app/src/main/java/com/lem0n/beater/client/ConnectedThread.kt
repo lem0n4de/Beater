@@ -1,8 +1,8 @@
 package com.lem0n.beater.client
 
 import android.bluetooth.BluetoothSocket
-import com.lem0n.base.EventBus.IEventBus
-import com.lem0n.base.EventBus.onMessageArrived
+import com.lem0n.common.EventBus.IEventBus
+import com.lem0n.common.EventBus.onMessageArrived
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber

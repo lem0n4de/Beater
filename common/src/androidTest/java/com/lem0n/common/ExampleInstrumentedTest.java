@@ -1,4 +1,4 @@
-package com.lem0n.base;
+package com.lem0n.common;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
