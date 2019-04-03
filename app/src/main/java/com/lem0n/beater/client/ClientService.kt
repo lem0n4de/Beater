@@ -8,6 +8,7 @@ import android.os.IBinder
 import com.lem0n.beater.internal.DeviceNotFoundException
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.EventBus.onConnectionLost
+import com.lem0n.common.Receivers.ClientReceiver
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
@@ -16,6 +17,7 @@ class ClientService : Service() {
     private val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
     private var connectThread : ConnectThread? = null
     private var connectedThread : ConnectedThread? = null
+    private val clientReceiver : ClientReceiver by inject()
 
     companion object {
         const val STATE_NONE = 0
