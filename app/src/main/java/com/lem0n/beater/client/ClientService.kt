@@ -17,7 +17,6 @@ class ClientService : Service() {
     private val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
     private var connectThread : ConnectThread? = null
     private var connectedThread : ConnectedThread? = null
-    private val clientReceiver : ClientReceiver by inject()
 
     companion object {
         const val STATE_NONE = 0
