@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/home"
+          android:title="@string/bottom_nav_title_home"
+          android:icon="@drawable/ic_home"
+          android:iconTint="@color/colorAccent"
+    />
+
+    <item android:id="@+id/hotspot"
+          android:title="@string/bottom_nav_title_hotspot"
+          android:icon="@drawable/ic_hotspot"
+    />
+
+    <item android:id="@+id/messages"
+          android:title="@string/bottom_nav_title_messages"
+          android:icon="@drawable/ic_messages"
+    />
+
+</menu>

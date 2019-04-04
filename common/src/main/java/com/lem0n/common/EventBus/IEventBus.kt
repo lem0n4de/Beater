@@ -4,5 +4,5 @@ import io.reactivex.Observable
 
 interface IEventBus {
     fun publish(event : Event)
-    fun listen(eventType : Class<out Event>) : Observable<out Event>
+    fun <T : Event> listen(eventType : Class<T>) : Observable<T>
 }

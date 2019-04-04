@@ -10,5 +10,5 @@ object EventBus : IEventBus {
         publisher.onNext(event)
     }
 
-    override fun listen(eventType: Class<out Event>): Observable<out Event> = publisher.ofType(eventType)
+    override fun <T : Event> listen(eventType: Class<T>): Observable<T> = publisher.ofType(eventType)
 }

@@ -1,5 +1,6 @@
 package com.lem0n.beater.client
 
+import android.annotation.SuppressLint
 import android.app.Service
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -8,10 +9,12 @@ import android.os.IBinder
 import com.lem0n.beater.internal.DeviceNotFoundException
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.EventBus.onConnectionLost
+import com.lem0n.common.EventBus.onRetryConnection
 import com.lem0n.common.Receivers.ClientReceiver
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
+@SuppressLint("CheckResult")
 class ClientService : Service() {
     private val bus : IEventBus by inject()
     private val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
@@ -69,5 +72,11 @@ class ClientService : Service() {
     override fun onCreate() {
         super.onCreate()
         tryConnection()
+
+        bus.listen(onRetryConnection::class.java).subscribe {
+            if (it is onRetryConnection) {
+                tryConnection()
+            }
+        }
     }
 }

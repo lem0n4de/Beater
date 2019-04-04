@@ -23,6 +23,8 @@ object Libs {
         private const val core_version = "1.1.0-alpha04"
         private const val constraint_version = "1.1.3"
         private const val lifecycle_version = "2.1.0-alpha02"
+        private const val navigation_version = "2.1.0-alpha02"
+
         const val room_runtime = "androidx.room:room-runtime:$room_version"
         const val room_compiler = "androidx.room:room-compiler:$room_version"
         const val room_rxjava2 = "androidx.room:room-rxjava2:$room_version"
@@ -37,6 +39,9 @@ object Libs {
         const val appcompat = "androidx.appcompat:appcompat:$appcompat_version"
         const val core_ktx = "androidx.core:core-ktx:$core_version"
         const val constraint_layout = "androidx.constraintlayout:constraintlayout:$constraint_version"
+
+        const val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+        const val navigation_ui = "androidx.navigation:navigation-ui-ktx:$navigation_version"
     }
 
     object ReactiveX {

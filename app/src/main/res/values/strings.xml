@@ -6,4 +6,11 @@
     <string name="starting_dialog_title">Pick a role</string>
     <string name="starting_dialog_text">Hello, welcome to Beater. Which role will this device take in the connection?
     </string>
+    <string name="bottom_nav_title_hotspot">Hotspot</string>
+    <string name="bottom_nav_title_messages">Messages</string>
+    <string name="bottom_nav_title_home">Homepage</string>
+    <string name="home_page_title">Home Page</string>
+    <string name="on_connection_failed">Connection failed.</string>
+    <string name="retry_connection_button">Retry</string>
+    <string name="on_connection_successful">Connection successful.</string>
 </resources>

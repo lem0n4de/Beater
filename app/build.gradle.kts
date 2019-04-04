@@ -57,6 +57,8 @@ dependencies {
     implementation(Libs.AndroidX.constraint_layout)
     implementation("com.jakewharton.timber:timber:4.7.1")
     implementation(project(":common"))
+    implementation(Libs.AndroidX.navigation_fragment)
+    implementation(Libs.AndroidX.navigation_ui)
 
     // Koin Dependency Injection
     testImplementation(Libs.Koin.testing)
