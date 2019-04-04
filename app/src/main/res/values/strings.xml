@@ -13,4 +13,6 @@
     <string name="on_connection_failed">Connection failed.</string>
     <string name="retry_connection_button">Retry</string>
     <string name="on_connection_successful">Connection successful.</string>
+    <string name="server_activity_title">Server</string>
+    <string name="on_listening_connections">Listening...</string>
 </resources>

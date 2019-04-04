@@ -1,34 +1,44 @@
 package com.lem0n.beater.server
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.os.Message
+import androidx.appcompat.app.AppCompatActivity
 import com.lem0n.beater.R
-import com.lem0n.beater.internal.BaseServiceActivity
 import com.lem0n.common.EventBus.IEventBus
+import com.lem0n.common.EventBus.onListeningConnections
 import com.lem0n.common.EventBus.onReceivedConnection
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_server.*
 import org.koin.android.ext.android.inject
+import timber.log.Timber
 
 @SuppressLint("CheckResult")
-class ServerActivity : BaseServiceActivity() {
+class ServerActivity : AppCompatActivity() {
     private val bus : IEventBus by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_server)
+        setTitle(R.string.server_activity_title)
 
-        bindToService(ServerService::class.java)
-
-        bus.listen(onReceivedConnection::class.java).subscribe {
-            if (it is onReceivedConnection) {
-                connectedDeviceText.text = it.string
+        bus.listen(onReceivedConnection::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnError {}
+            .subscribe {
+                connectedDeviceText.text = "Connected"
             }
-        }
-    }
 
-    override fun handlerFunction(msg: Message) {
-        when (msg.what) {
+        bus.listen(onListeningConnections::class.java)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnError {}
+            .subscribe {
+                connectedDeviceText.text = getString(R.string.on_listening_connections)
+            }
+
+        Intent(this, ServerService::class.java).also {
+            startService(it)
         }
+        Timber.d("Started activity.")
     }
 }

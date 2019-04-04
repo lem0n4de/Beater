@@ -11,6 +11,7 @@ import com.lem0n.beater.BuildConfig
 import com.lem0n.beater.MessagesContract
 import com.lem0n.beater.internal.Config
 import com.lem0n.common.EventBus.IEventBus
+import com.lem0n.common.EventBus.onListeningConnections
 import com.lem0n.common.EventBus.onReceivedConnection
 import com.lem0n.common.Receivers.ServerReceiver
 import org.koin.android.ext.android.inject
@@ -21,7 +22,6 @@ var service: ServerService? = null
 
 class ServerService : Service() {
     internal var clientList: ArrayList<Messenger> = ArrayList()
-    internal val messenger by lazy { Messenger(ActivityHandler()) }
 
     private val bus : IEventBus by inject()
     private val serverReceiver : ServerReceiver by inject()
@@ -40,34 +40,16 @@ class ServerService : Service() {
     private var connectedThread: ConnectedThread? = null
     private var listenThread: ListenThread? = null
 
-    inner class ActivityHandler() : Handler() {
-        override fun handleMessage(msg: Message?) {
-            if (msg != null) {
-                when (msg.what) {
-                    MessagesContract.REGISTER_CLIENT -> {
-                        registerClient(msg.replyTo)
-                    }
-                    MessagesContract.UNREGISTER_CLIENT -> {
-                        unregisterClient(msg.replyTo)
-                    }
-                }
-            }
-        }
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
     }
 
-    internal fun registerClient(messenger: Messenger) {
-        clientList.add(messenger)
-    }
-
-    internal fun unregisterClient(messenger: Messenger) {
-        clientList.remove(messenger)
-    }
-
-    override fun onBind(intent: Intent): IBinder {
+    override fun onCreate() {
+        super.onCreate()
         if (BuildConfig.DEBUG) {
             service = this@ServerService
         }
-        return messenger.binder
+        listen()
     }
 
     fun resetState() {
@@ -136,6 +118,7 @@ class ServerService : Service() {
         override fun run() {
             val socket: BluetoothSocket? = try {
                 Timber.d("Server socket is listening.")
+                bus.publish(onListeningConnections())
                 serverSocket?.accept()
             } catch (e: Exception) {
                 Timber.e(e, "Socket's accept method failed.")
