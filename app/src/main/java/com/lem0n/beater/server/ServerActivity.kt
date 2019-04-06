@@ -26,7 +26,7 @@ class ServerActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .doOnError {}
             .subscribe {
-                connectedDeviceText.text = "Connected"
+                connectedDeviceText.text = getString(R.string.on_received_connection)
             }
 
         bus.listen(onListeningConnections::class.java)
@@ -39,6 +39,6 @@ class ServerActivity : AppCompatActivity() {
         Intent(this, ServerService::class.java).also {
             startService(it)
         }
-        Timber.d("Started activity.")
+        Timber.d("Started server service.")
     }
 }

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.lem0n.beater.R
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.EventBus.onConnectionFailed
@@ -68,7 +69,8 @@ class HomePageFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        activity!!.setTitle(R.string.home_page_title)
+        val ac = activity as AppCompatActivity
+        ac.supportActionBar!!.title = getString(R.string.home_page_title)
     }
 
     override fun onDestroy() {

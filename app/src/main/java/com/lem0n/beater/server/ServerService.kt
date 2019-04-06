@@ -95,6 +95,7 @@ class ServerService : Service() {
     }
 
     fun resetAndListen() {
+        Timber.d("Reset and listen.")
         resetState()
         listen()
     }
