@@ -43,10 +43,11 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(Libs.Kotlin.stdlib_jdk8)
-    implementation(Libs.ReactiveX.rxandroid)
-    implementation(Libs.ReactiveX.rxkotlin)
-    implementation(Libs.ReactiveX.rxjava2)
+    api(Libs.Kotlin.stdlib_jdk8)
+
+    api(Libs.AndroidX.appcompat)
+    api(Libs.AndroidX.core_ktx)
+    api(Libs.AndroidX.constraint_layout)
     // Koin
     api(Libs.Koin.viewmodel)
     // Logging with Timber
@@ -56,10 +57,6 @@ dependencies {
     api(Libs.ReactiveX.rxkotlin)
     api(Libs.ReactiveX.rxjava2)
 
-    api(Libs.AndroidX.room_runtime)
-    kapt(Libs.AndroidX.room_compiler)
-    api(Libs.AndroidX.room_rxjava2)
-    api(Libs.AndroidX.room_coroutines)
     testImplementation("junit:junit:4.12")
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")

@@ -4,12 +4,11 @@ import android.annotation.SuppressLint
 import android.app.Service
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothSocket
 import android.content.Intent
 import android.os.IBinder
 import com.lem0n.beater.internal.DeviceNotFoundException
-import com.lem0n.common.EventBus.IEventBus
-import com.lem0n.common.EventBus.onConnectionLost
-import com.lem0n.common.EventBus.onRetryConnection
+import com.lem0n.common.EventBus.*
 import com.lem0n.common.Receivers.ClientReceiver
 import org.koin.android.ext.android.inject
 import timber.log.Timber
@@ -56,13 +55,20 @@ class ClientService : Service() {
             Timber.d("clientState == STATE_CONNECTED, canceling it.")
             connectedThread?.cancel()
             connectedThread = null
-            bus.publish(onConnectionLost())
         }
     }
 
     fun tryConnection() {
+        resetState()
         val dev = getDevice()
         connect(dev)
+    }
+
+    fun stabilizeConnection(socket : BluetoothSocket) {
+        resetState()
+        connectedThread = ConnectedThread(socket)
+        connectedThread?.start()
+        Timber.d("Connected thread started.")
     }
 
     override fun onBind(intent: Intent): IBinder? {
@@ -71,12 +77,12 @@ class ClientService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        tryConnection()
 
-        bus.listen(onRetryConnection::class.java).subscribe {
-            if (it is onRetryConnection) {
-                tryConnection()
-            }
+        bus.listen(onRetryConnection::class.java).doOnError{}.subscribe { tryConnection() }
+        bus.listen(onConnectedEvent::class.java).doOnError{}.subscribe {
+            stabilizeConnection(it.socket)
+            bus.publish(onConnectionSuccessful())
         }
+        tryConnection()
     }
 }

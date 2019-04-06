@@ -6,7 +6,7 @@ import android.bluetooth.BluetoothSocket
 import com.lem0n.beater.internal.Config
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.EventBus.onConnectionFailed
-import com.lem0n.common.EventBus.onConnectionSuccessful
+import com.lem0n.common.EventBus.onConnectedEvent
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
@@ -24,7 +24,7 @@ class ConnectThread(private val dev : BluetoothDevice) : Thread(), KoinComponent
         try {
             socket.connect()
             Timber.d("Socket has connected.")
-            bus.publish(onConnectionSuccessful())
+            bus.publish(onConnectedEvent(socket))
         } catch (e : Exception) {
             Timber.e(e, "Error while socket.connect()")
             bus.publish(onConnectionFailed())

@@ -16,9 +16,9 @@ import timber.log.Timber
 
 class MainApplication : Application() {
     val appModule = module {
-        single<UserRepository> { UserRepositoryImpl(this@MainApplication) }
+        single<UserRepository>(createdAtStart = true) { UserRepositoryImpl(this@MainApplication) }
 
-        viewModel<HomePageViewModel> { HomePageViewModel() }
+        viewModel<HomePageViewModel> { HomePageViewModel(get()) }
     }
 
     override fun onCreate() {

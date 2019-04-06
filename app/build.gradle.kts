@@ -51,10 +51,6 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation(Libs.Kotlin.stdlib_jdk8)
-    implementation(Libs.AndroidX.appcompat)
-    implementation(Libs.AndroidX.core_ktx)
-    implementation(Libs.AndroidX.constraint_layout)
     implementation(project(":common"))
     implementation(Libs.AndroidX.navigation_fragment)
     implementation(Libs.AndroidX.navigation_ui)
@@ -68,10 +64,10 @@ dependencies {
 
 
     // Room
-//    implementation(Libs.AndroidX.room_runtime)
-//    kapt(Libs.AndroidX.room_compiler)
-//    implementation(Libs.AndroidX.room_rxjava2)
-//    implementation(Libs.AndroidX.room_coroutines)
+    implementation(Libs.AndroidX.room_runtime)
+    kapt(Libs.AndroidX.room_compiler)
+    implementation(Libs.AndroidX.room_rxjava2)
+    implementation(Libs.AndroidX.room_coroutines)
     testImplementation(Libs.AndroidX.room_testing)
     androidTestImplementation(Libs.AndroidX.room_testing)
 

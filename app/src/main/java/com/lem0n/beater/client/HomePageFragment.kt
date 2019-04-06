@@ -10,12 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.lem0n.beater.R
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.EventBus.onConnectionFailed
-import com.lem0n.common.EventBus.onConnectionSuccessful
 import com.lem0n.common.EventBus.onRetryConnection
+import com.lem0n.common.senders.ClientSender
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.home_page_fragment.*
 import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 @SuppressLint("CheckResult")
@@ -25,9 +26,7 @@ class HomePageFragment : Fragment() {
     companion object {
         fun newInstance() = HomePageFragment()
     }
-
     private val viewModel : HomePageViewModel by inject()
-    private val bus : IEventBus by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,32 +38,30 @@ class HomePageFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         retry_connection.setOnClickListener {
-            bus.publish(onRetryConnection())
+            viewModel.retryConnection()
         }
-        Timber.d("Set on click listener for retry button.")
+
+        send_stuff.setOnClickListener {
+            viewModel.send("Hello")
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.d("onCreate")
 
-
         // Events
-        val conFailDis = bus.listen(onConnectionFailed::class.java)
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {}
-            .subscribe {
-                Timber.d("Connection failed.")
-                connection_status.text = getString(R.string.on_connection_failed)
-            }
-        val conSuccessDis = bus.listen(onConnectionSuccessful::class.java)
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnError {}
-            .subscribe {
-                Timber.d("Connection successfull.")
-                connection_status.text = getString(R.string.on_connection_successful)
-            }
-        compositeDisposable.addAll(conFailDis, conSuccessDis)
+        val conFail = viewModel.conFail.subscribe {
+            Timber.d("Connection failed.")
+            connection_status.text = getString(R.string.on_connection_failed)
+        }
+        val conSuc = viewModel.conSuccess.subscribe {
+            Timber.d("Connection successfull.")
+            viewModel.isConnected = true
+            send_stuff.visibility = View.VISIBLE
+            connection_status.text = getString(R.string.on_connection_successful)
+        }
+        compositeDisposable.addAll(conFail, conSuc)
     }
 
     override fun onResume() {
