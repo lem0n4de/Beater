@@ -55,6 +55,11 @@ dependencies {
     api(Libs.ReactiveX.rxandroid)
     api(Libs.ReactiveX.rxkotlin)
     api(Libs.ReactiveX.rxjava2)
+
+    api(Libs.AndroidX.room_runtime)
+    kapt(Libs.AndroidX.room_compiler)
+    api(Libs.AndroidX.room_rxjava2)
+    api(Libs.AndroidX.room_coroutines)
     testImplementation("junit:junit:4.12")
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
