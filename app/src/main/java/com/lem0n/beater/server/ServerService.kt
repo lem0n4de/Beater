@@ -54,32 +54,25 @@ class ServerService : Service() {
 
     fun resetState() {
         Timber.i("Resetting server serverState.")
-        if (serverState == STATE_LISTENING) {
-            Timber.d("State == STATE_LISTENING")
-            if (listenThread != null) {
-                try {
-                    listenThread?.cancel()
-                } catch (e: Exception) {
-                    Timber.e(e, "Listen thread couldn't be cancelled.")
-                }
-                listenThread = null
-            } else {
-                Timber.e("State was STATE_LISTENING but listenThread reference was null.")
+        if (listenThread != null) {
+            try {
+                listenThread?.cancel()
+            } catch (e: Exception) {
+                Timber.e(e, "Listen thread couldn't be cancelled.")
             }
+            listenThread = null
+        } else {
+            Timber.e("State was STATE_LISTENING but listenThread reference was null.")
         }
-
-        if (serverState == STATE_CONNECTED) {
-            Timber.d("State == STATE_CONNECTED")
-            if (connectedThread != null) {
-                try {
-                    connectedThread?.cancel()
-                } catch (e: Exception) {
-                    Timber.e(e, "Connected thread couldn't be cancelled.")
-                }
-                connectedThread = null
-            } else {
-                Timber.e("State was STATE_CONNECTED but connectedThread reference was null.")
+        if (connectedThread != null) {
+            try {
+                connectedThread?.cancel()
+            } catch (e: Exception) {
+                Timber.e(e, "Connected thread couldn't be cancelled.")
             }
+            connectedThread = null
+        } else {
+            Timber.e("State was STATE_CONNECTED but connectedThread reference was null.")
         }
         serverState = STATE_NONE
     }
@@ -123,6 +116,7 @@ class ServerService : Service() {
                 serverSocket?.accept()
             } catch (e: Exception) {
                 Timber.e(e, "Socket's accept method failed.")
+                cancel()
                 null
             }
 
@@ -153,14 +147,13 @@ class ServerService : Service() {
                 try {
                     Timber.d("Waiting to read data from bluetooth.")
                     bytes = inputStream.read()
+                    serverReceiver.receive(buffer, bytes)
                 } catch (e: Exception) {
                     Timber.e(e, "Input stream disconnected.")
                     resetAndListen()
                     break
                 }
             }
-
-            serverReceiver.receive(buffer, bytes)
         }
 
 
