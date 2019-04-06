@@ -47,7 +47,14 @@ dependencies {
     implementation(Libs.ReactiveX.rxandroid)
     implementation(Libs.ReactiveX.rxkotlin)
     implementation(Libs.ReactiveX.rxjava2)
+    // Koin
     api(Libs.Koin.viewmodel)
+    // Logging with Timber
+    api(Libs.Timber.timber)
+    // ReactiveX
+    api(Libs.ReactiveX.rxandroid)
+    api(Libs.ReactiveX.rxkotlin)
+    api(Libs.ReactiveX.rxjava2)
     testImplementation("junit:junit:4.12")
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")

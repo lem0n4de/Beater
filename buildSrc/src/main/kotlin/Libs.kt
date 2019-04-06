@@ -1,4 +1,9 @@
 object Libs {
+
+    object Timber {
+        private const val timber_version = "4.7.1"
+        val timber = "com.jakewharton.timber:timber:$timber_version"
+    }
     object Kotlin {
         private const val version = "1.3.21"
         val stdlib_jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"

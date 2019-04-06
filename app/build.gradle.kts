@@ -55,7 +55,6 @@ dependencies {
     implementation(Libs.AndroidX.appcompat)
     implementation(Libs.AndroidX.core_ktx)
     implementation(Libs.AndroidX.constraint_layout)
-    implementation("com.jakewharton.timber:timber:4.7.1")
     implementation(project(":common"))
     implementation(Libs.AndroidX.navigation_fragment)
     implementation(Libs.AndroidX.navigation_ui)
@@ -67,10 +66,6 @@ dependencies {
     // Lifecycle
     implementation(Libs.AndroidX.lifecycle_reactive_streams)
 
-    // ReactiveX
-    implementation(Libs.ReactiveX.rxandroid)
-    implementation(Libs.ReactiveX.rxkotlin)
-    implementation(Libs.ReactiveX.rxjava2)
 
     // Room
     implementation(Libs.AndroidX.room_runtime)
