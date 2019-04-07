@@ -1,10 +1,15 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+
 plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+}
+apply {
+    plugin("kotlin-android")
+    plugin("kotlin-android-extensions")
 }
 
 tasks.withType(KotlinCompile::class).configureEach {
@@ -43,22 +48,12 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    api(Libs.Kotlin.stdlib_jdk8)
-
-    api(Libs.AndroidX.appcompat)
-    api(Libs.AndroidX.core_ktx)
-    api(Libs.AndroidX.constraint_layout)
-    // Koin
-    api(Libs.Koin.viewmodel)
-    // Logging with Timber
-    api(Libs.Timber.timber)
-    // ReactiveX
-    api(Libs.ReactiveX.rxandroid)
-    api(Libs.ReactiveX.rxkotlin)
-    api(Libs.ReactiveX.rxjava2)
-    api(Libs.ReactiveX.rxrelay)
+    implementation(project(":common"))
 
     testImplementation("junit:junit:4.12")
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
+}
+repositories {
+    mavenCentral()
 }

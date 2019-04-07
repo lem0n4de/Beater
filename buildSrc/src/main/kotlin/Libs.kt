@@ -53,10 +53,12 @@ object Libs {
         private const val java_version = "2.2.7"
         private const val kotlin_version = "2.3.0"
         private const val android_version = "2.1.1"
+        private const val relay_version = "2.1.0"
 
         const val rxjava2 = "io.reactivex.rxjava2:rxjava:$java_version"
         const val rxkotlin = "io.reactivex.rxjava2:rxkotlin:$kotlin_version"
         const val rxandroid = "io.reactivex.rxjava2:rxandroid:$android_version"
+        const val rxrelay = "com.jakewharton.rxrelay2:rxrelay:$relay_version"
     }
 
     object AndroidXTesting {

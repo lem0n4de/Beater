@@ -51,7 +51,9 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    // Local module dependencies
     implementation(project(":common"))
+    implementation(project(":hotspot"))
     implementation(Libs.AndroidX.navigation_fragment)
     implementation(Libs.AndroidX.navigation_ui)
 
