@@ -12,7 +12,7 @@ class NoSenderFunctionDefinedException() : Exception()
 object ServerCommunicator : ICommunicator {
     private val receiverFunctionStore = NonOverridingHashMap<UUID, ReceiverFunction>()
     private var lock : UUID? = null
-    internal lateinit var senderFunction : SenderFunction
+    lateinit var senderFunction : SenderFunction
 
     /**
      * A general function for sending signals to
