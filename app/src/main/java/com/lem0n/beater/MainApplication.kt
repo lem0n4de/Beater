@@ -6,7 +6,6 @@ import com.lem0n.beater.data.UserRepository
 import com.lem0n.beater.data.UserRepositoryImpl
 import com.lem0n.common.EventBus.EventBus
 import com.lem0n.common.EventBus.IEventBus
-import com.lem0n.common.Receivers.ServerReceiver
 import com.lem0n.common.commonModule
 import org.koin.android.ext.koin.androidLogger
 import org.koin.android.viewmodel.dsl.viewModel

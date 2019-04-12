@@ -5,15 +5,15 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothServerSocket
 import android.bluetooth.BluetoothSocket
 import android.content.Intent
-import android.os.*
+import android.os.IBinder
+import android.os.Messenger
 import androidx.annotation.RestrictTo
 import com.lem0n.beater.BuildConfig
-import com.lem0n.beater.MessagesContract
 import com.lem0n.beater.internal.Config
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.EventBus.onListeningConnections
 import com.lem0n.common.EventBus.onReceivedConnection
-import com.lem0n.common.Receivers.ServerReceiver
+import com.lem0n.common.communicators.IServerCommunicator
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
@@ -24,7 +24,7 @@ class ServerService : Service() {
     internal var clientList: ArrayList<Messenger> = ArrayList()
 
     private val bus : IEventBus by inject()
-    private val serverReceiver : ServerReceiver by inject()
+    private val serverCommunicator : IServerCommunicator by inject()
 
     companion object {
         private const val STATE_NONE = 0
@@ -147,7 +147,7 @@ class ServerService : Service() {
                 try {
                     Timber.d("Waiting to read data from bluetooth.")
                     bytes = inputStream.read()
-                    serverReceiver.receive(buffer, bytes)
+                    serverCommunicator.receive(buffer, bytes)
                 } catch (e: Exception) {
                     Timber.e(e, "Input stream disconnected.")
                     resetAndListen()
