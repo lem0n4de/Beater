@@ -13,7 +13,7 @@ import com.lem0n.beater.internal.Config
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.EventBus.onListeningConnections
 import com.lem0n.common.EventBus.onReceivedConnection
-import com.lem0n.common.communicators.IServerCommunicator
+import com.lem0n.common.communicators.ServerCommunicator
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
@@ -24,7 +24,7 @@ class ServerService : Service() {
     internal var clientList: ArrayList<Messenger> = ArrayList()
 
     private val bus : IEventBus by inject()
-    private val serverCommunicator : IServerCommunicator by inject()
+    private val serverCommunicator : ServerCommunicator by inject()
 
     companion object {
         private const val STATE_NONE = 0

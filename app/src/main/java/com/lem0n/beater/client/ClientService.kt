@@ -8,8 +8,10 @@ import android.bluetooth.BluetoothSocket
 import android.content.Intent
 import android.os.IBinder
 import com.lem0n.beater.internal.DeviceNotFoundException
-import com.lem0n.common.EventBus.*
-import com.lem0n.common.Receivers.ClientReceiver
+import com.lem0n.common.EventBus.IEventBus
+import com.lem0n.common.EventBus.onConnectedEvent
+import com.lem0n.common.EventBus.onConnectionSuccessful
+import com.lem0n.common.EventBus.onRetryConnection
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
