@@ -5,16 +5,15 @@ import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.EventBus.onConnectionFailed
 import com.lem0n.common.EventBus.onConnectionSuccessful
 import com.lem0n.common.EventBus.onRetryConnection
-import com.lem0n.common.senders.ClientSender
+import com.lem0n.common.communicators.ClientCommunicator
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class HomePageViewModel(
     private val bus : IEventBus
 ) : ViewModel(), KoinComponent {
-    private val clientSender: ClientSender by inject()
+    private val clientCommunicator : ClientCommunicator by inject()
     var isConnected = false
 
     val conFail = bus.listen(onConnectionFailed::class.java)
@@ -27,7 +26,7 @@ class HomePageViewModel(
 
     fun send(s : String) {
         if (isConnected == true) {
-            clientSender.send(s.toByteArray())
+            clientCommunicator.send(s.toByteArray())
         }
     }
 

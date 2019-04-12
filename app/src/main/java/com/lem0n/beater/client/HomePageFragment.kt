@@ -11,7 +11,6 @@ import com.lem0n.beater.R
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.EventBus.onConnectionFailed
 import com.lem0n.common.EventBus.onRetryConnection
-import com.lem0n.common.senders.ClientSender
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.home_page_fragment.*
