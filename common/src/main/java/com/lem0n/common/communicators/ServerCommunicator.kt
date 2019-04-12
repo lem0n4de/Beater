@@ -12,6 +12,7 @@ class NoSenderFunctionDefinedException() : Exception()
 object ServerCommunicator : ICommunicator {
     private val receiverFunctionStore = NonOverridingHashMap<UUID, ReceiverFunction>()
     private var lock : UUID? = null
+    private var lockCount : Int = 0
     lateinit var senderFunction : SenderFunction
 
     /**
@@ -38,9 +39,15 @@ object ServerCommunicator : ICommunicator {
      */
     override fun receive(byteArray: ByteArray, length: Int) {
         Timber.i("Received signal.")
-        val incomingSignal = UUID.fromString(String(byteArray))
+        if (lock != null && lockCount > 0) {
+            receiverFunctionStore[lock!!]!!(byteArray, length, lockCount)
+            lockCount -= 1
+            Timber.i("Lock is present, sent data to according function. lockCount = $lockCount")
+            return
+        }
+        val incomingSignal = UUID.fromString(String(byteArray, 0, length))
         if (receiverFunctionStore.containsKey(incomingSignal)) {
-            receiverFunctionStore[incomingSignal]!!(byteArray, length, 0)
+            receiverFunctionStore[incomingSignal]!!(byteArray, length, lockCount)
             Timber.i("A function found for the incoming signal.")
         } else {
             Timber.i("No function found for incoming signal.")
@@ -49,14 +56,16 @@ object ServerCommunicator : ICommunicator {
 
     /**
      * @param signal Signal of the function that will receive later data.
+     * @param lockCount The number of times that the function will receive incoming data.
      * @throws UnauthorizedAction
      */
     @Throws(UnauthorizedAction::class)
-    fun lock(signal : UUID) {
+    fun lock(signal : UUID, lockCount : Int = 0) {
         if (lock != null) {
             throw UnauthorizedAction("Lock is occupied.")
         }
         lock = signal
+        this.lockCount = lockCount
     }
 
     /**
@@ -69,5 +78,9 @@ object ServerCommunicator : ICommunicator {
             throw UnauthorizedAction("Lock and the signal that is sent now is not the same.")
         }
         lock = null
+    }
+
+    fun registerReceiver(signal: UUID, block : ReceiverFunction) {
+        receiverFunctionStore[signal] = block
     }
 }
