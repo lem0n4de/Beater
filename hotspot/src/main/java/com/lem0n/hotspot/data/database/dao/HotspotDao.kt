@@ -1,8 +1,7 @@
-package com.lem0n.hotspot.data
+package com.lem0n.hotspot.data.database.dao
 
 import androidx.room.*
-import com.lem0n.hotspot.data.entity.HotspotEntry
-import io.reactivex.Completable
+import com.lem0n.hotspot.data.database.entity.HotspotEntry
 import io.reactivex.Observable
 import io.reactivex.Single
 
@@ -20,6 +19,9 @@ interface HotspotDao {
 
     @Query("SELECT id, date, remoteState FROM hotspot")
     fun getAllEntries() : Observable<List<HotspotEntry>>
+
+    @Query("SELECT id, date, remoteState FROM hotspot ORDER BY id DESC LIMIT 1")
+    fun getLastEntry() : Single<HotspotEntry>
 
     @Delete
     fun delete(hotspotEntry : HotspotEntry)

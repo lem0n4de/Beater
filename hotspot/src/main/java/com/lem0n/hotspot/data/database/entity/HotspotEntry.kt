@@ -1,4 +1,4 @@
-package com.lem0n.hotspot.data.entity
+package com.lem0n.hotspot.data.database.entity
 
 
 import androidx.room.Entity
