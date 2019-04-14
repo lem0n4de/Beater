@@ -64,12 +64,11 @@ dependencies {
     // Lifecycle
     implementation(Libs.AndroidX.lifecycle_reactive_streams)
 
-
     // Room
     implementation(Libs.AndroidX.room_runtime)
     kapt(Libs.AndroidX.room_compiler)
     implementation(Libs.AndroidX.room_rxjava2)
-    implementation(Libs.AndroidX.room_coroutines)
+    implementation(Libs.AndroidX.room_ktx)
     testImplementation(Libs.AndroidX.room_testing)
     androidTestImplementation(Libs.AndroidX.room_testing)
 

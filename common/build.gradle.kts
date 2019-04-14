@@ -51,7 +51,8 @@ dependencies {
     // Koin
     api(Libs.Koin.viewmodel)
     // Logging with Timber
-    api(Libs.Timber.timber)
+    api(Libs.JakeWharton.timber)
+    api(Libs.JakeWharton.threetenabp)
     // ReactiveX
     api(Libs.ReactiveX.rxandroid)
     api(Libs.ReactiveX.rxkotlin)

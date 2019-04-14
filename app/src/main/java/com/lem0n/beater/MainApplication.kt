@@ -1,6 +1,7 @@
 package com.lem0n.beater
 
 import android.app.Application
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.lem0n.beater.client.HomePageViewModel
 import com.lem0n.beater.data.UserRepository
 import com.lem0n.beater.data.UserRepositoryImpl
@@ -29,5 +30,6 @@ class MainApplication : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+        AndroidThreeTen.init(this)
     }
 }

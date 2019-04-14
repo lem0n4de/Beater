@@ -51,7 +51,12 @@ dependencies {
     implementation(project(":common"))
 
     implementation(Libs.AndroidX.lifecycle_viewmodel_livedata)
+    implementation(Libs.AndroidX.room_runtime)
+    kapt(Libs.AndroidX.room_compiler)
+    implementation(Libs.AndroidX.room_rxjava2)
+    implementation(Libs.AndroidX.room_ktx)
     // implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
+    implementation(Libs.Material.components)
     testImplementation("junit:junit:4.12")
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")

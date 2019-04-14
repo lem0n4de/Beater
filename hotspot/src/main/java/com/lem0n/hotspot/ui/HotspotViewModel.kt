@@ -1,4 +1,4 @@
-package com.lem0n.hotspot
+package com.lem0n.hotspot.ui
 
 import androidx.lifecycle.ViewModel;
 

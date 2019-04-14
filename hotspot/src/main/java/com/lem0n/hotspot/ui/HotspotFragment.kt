@@ -1,10 +1,11 @@
-package com.lem0n.hotspot
+package com.lem0n.hotspot.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.lem0n.hotspot.R
 import org.koin.android.ext.android.inject
 
 

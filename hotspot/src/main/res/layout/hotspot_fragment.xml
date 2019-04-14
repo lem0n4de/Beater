@@ -3,12 +3,65 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".HotspotFragment">
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".ui.HotspotFragment">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello"/>
+            android:layout_height="match_parent">
+
+        <EditText
+                android:id="@+id/ssid_text_field"
+                android:layout_width="200dp"
+                android:layout_height="52dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginBottom="150dp"
+                android:hint="@string/ssid_text_field_hint"
+                android:inputType="text"
+                tools:ignore="Autofill"
+        />
+
+        <EditText
+                android:id="@+id/password_text_field"
+                android:layout_width="200dp"
+                android:layout_height="52dp"
+                app:layout_constraintTop_toBottomOf="@id/ssid_text_field"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:hint="@string/password_text_field_hint"
+                android:inputType="textPassword"
+                tools:ignore="Autofill"
+        />
+
+        <Switch
+                android:id="@+id/hotspot_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/password_text_field"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="30dp"
+                tools:hint="Toggle Hotspot   "
+        />
+
+        <TextView
+            android:layout_height="52dp"
+            android:layout_width="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/hotspot_switch"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Açık"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            style="@style/TextAppearance.AppCompat.Caption"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

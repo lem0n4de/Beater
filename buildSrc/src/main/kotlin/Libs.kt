@@ -1,8 +1,10 @@
 object Libs {
 
-    object Timber {
+    object JakeWharton {
         private const val timber_version = "4.7.1"
         val timber = "com.jakewharton.timber:timber:$timber_version"
+        private const val threetenabp_version = "1.2.0"
+        val threetenabp = "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
     }
     object Kotlin {
         private const val version = "1.3.21"
@@ -23,7 +25,7 @@ object Libs {
     }
 
     object AndroidX {
-        private const val room_version = "2.1.0-alpha04"
+        private const val room_version = "2.1.0-alpha06"
         private const val appcompat_version = "1.1.0-alpha02"
         private const val core_version = "1.1.0-alpha04"
         private const val constraint_version = "1.1.3"
@@ -33,7 +35,7 @@ object Libs {
         const val room_runtime = "androidx.room:room-runtime:$room_version"
         const val room_compiler = "androidx.room:room-compiler:$room_version"
         const val room_rxjava2 = "androidx.room:room-rxjava2:$room_version"
-        const val room_coroutines = "androidx.room:room-coroutines:$room_version"
+        const val room_ktx = "androidx.room:room-ktx:$room_version"
         const val room_testing = "androidx.room:room-testing:$room_version"
 
         const val lifecycle_viewmodel_livedata = "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
