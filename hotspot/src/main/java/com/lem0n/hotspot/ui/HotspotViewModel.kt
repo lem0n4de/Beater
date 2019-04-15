@@ -1,7 +1,7 @@
 package com.lem0n.hotspot.ui
 
-import androidx.lifecycle.ViewModel;
+import com.lem0n.common.base.BaseViewModel
 
-class HotspotViewModel : ViewModel() {
+class HotspotViewModel : BaseViewModel() {
     // TODO: Implement the ViewModel
 }

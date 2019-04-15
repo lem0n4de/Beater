@@ -58,6 +58,9 @@ dependencies {
     api(Libs.ReactiveX.rxkotlin)
     api(Libs.ReactiveX.rxjava2)
     api(Libs.ReactiveX.rxrelay)
+    // Kotlin coroutines
+    api(Libs.Kotlin.coroutines_core)
+    api(Libs.Kotlin.coroutines_android)
 
     testImplementation("junit:junit:4.12")
     androidTestImplementation("com.android.support.test:runner:1.0.2")

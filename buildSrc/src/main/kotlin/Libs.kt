@@ -8,8 +8,11 @@ object Libs {
     }
     object Kotlin {
         private const val version = "1.3.21"
+        private const val coroutine_version = "1.1.1"
         val stdlib_jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
+        val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+        val coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
     }
 
     object Material {
