@@ -87,4 +87,17 @@ class ClientService : Service() {
         }
         tryConnection()
     }
+
+    fun write(buffer : ByteArray) {
+        lateinit var r : ConnectedThread
+
+        synchronized(Any()) {
+            if (clientState != STATE_CONNECTED) {
+                return
+            }
+            r = connectedThread!!
+        }
+
+        r.write(buffer)
+    }
 }

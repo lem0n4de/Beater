@@ -33,6 +33,7 @@ object ClientCommunicator : ICommunicator {
      */
     override fun receive(byteArray: ByteArray, length: Int) {
         Timber.i("Received signal.")
+        Timber.i(String(byteArray, 0, length))
         val incomingSignal = UUID.fromString(String(byteArray))
         if (receiverFunctionStore.containsKey(incomingSignal)) {
             receiverFunctionStore[incomingSignal]!!(byteArray, length, 0)
@@ -64,5 +65,9 @@ object ClientCommunicator : ICommunicator {
             throw UnauthorizedAction("Lock and the signal that is sent now is not the same.")
         }
         lock = null
+    }
+
+    fun registerReceiver(signal: UUID, block : ReceiverFunction) {
+        receiverFunctionStore[signal] = block
     }
 }

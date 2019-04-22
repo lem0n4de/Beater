@@ -4,12 +4,13 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import org.koin.core.KoinComponent
 import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by lem0n on 14/04/19.
  */
-open class BaseViewModel : ViewModel(), CoroutineScope {
+open class BaseViewModel : ViewModel(), CoroutineScope, KoinComponent {
     private val job = Job()
     /**
      * Context of this scope.

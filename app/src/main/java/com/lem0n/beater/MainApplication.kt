@@ -8,6 +8,7 @@ import com.lem0n.beater.data.UserRepositoryImpl
 import com.lem0n.common.EventBus.EventBus
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.commonModule
+import com.lem0n.hotspot.HotspotLib
 import org.koin.android.ext.koin.androidLogger
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
@@ -31,5 +32,6 @@ class MainApplication : Application() {
             Timber.plant(Timber.DebugTree())
         }
         AndroidThreeTen.init(this)
+        HotspotLib.init(this@MainApplication)
     }
 }

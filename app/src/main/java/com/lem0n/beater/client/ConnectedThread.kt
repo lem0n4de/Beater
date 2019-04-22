@@ -32,7 +32,7 @@ class ConnectedThread(private val socket : BluetoothSocket) : Thread(), KoinComp
     fun write(buffer : ByteArray) {
         try {
             outputStream.write(buffer)
-            Timber.d("Message sent.")
+            Timber.d("Message sent. ")
         } catch (e : Exception) {
             Timber.e(e, "Failed attempt to send message.")
         }

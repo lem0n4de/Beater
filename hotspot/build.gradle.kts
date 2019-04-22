@@ -50,7 +50,6 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(project(":common"))
 
-    implementation(Libs.AndroidX.lifecycle_viewmodel_livedata)
     implementation(Libs.AndroidX.room_runtime)
     kapt(Libs.AndroidX.room_compiler)
     implementation(Libs.AndroidX.room_rxjava2)

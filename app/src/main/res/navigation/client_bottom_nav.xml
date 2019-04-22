@@ -6,4 +6,6 @@
 
     <fragment android:id="@+id/homePageFragment" android:name="com.lem0n.beater.client.HomePageFragment"
               android:label="home_page_fragment" tools:layout="@layout/home_page_fragment"/>
+    <fragment android:id="@+id/hotspotFragment" android:name="com.lem0n.hotspot.ui.HotspotFragment"
+              android:label="HotspotFragment"/>
 </navigation>

@@ -10,56 +10,97 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <EditText
+        <!-- Progress bar-->
+        <RelativeLayout
+                android:id="@+id/loadingCircle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone">
+
+            <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+            />
+        </RelativeLayout>
+        <!-- Status of hotspot -->
+        <TextView
+            android:id="@+id/hotspot_state"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            app:layout_constraintBottom_toTopOf="@id/ssid_text_field"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            style="@style/TextAppearance.AppCompat.Widget.Button"
+            tools:text="On"
+        />
+	    <!-- SSID -->
+        <TextView
                 android:id="@+id/ssid_text_field"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="52dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginBottom="150dp"
-                android:hint="@string/ssid_text_field_hint"
-                android:inputType="text"
-                tools:ignore="Autofill"
+                android:layout_marginBottom="250dp"
+                tools:text="Automatic Hotspot"
+                android:gravity="center"
+                style="@style/TextAppearance.AppCompat.Subhead"
         />
 
-        <EditText
+        <!-- Password -->
+        <TextView
                 android:id="@+id/password_text_field"
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="52dp"
                 app:layout_constraintTop_toBottomOf="@id/ssid_text_field"
                 android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:hint="@string/password_text_field_hint"
-                android:inputType="textPassword"
-                tools:ignore="Autofill"
+                android:layout_marginBottom="150dp"
+                tools:text="thisismycurrentpasssword"
+                android:gravity="center"
+                style="@style/TextAppearance.AppCompat.Subhead"
         />
-
-        <Switch
-                android:id="@+id/hotspot_switch"
+        <!-- Change ssid and password button -->
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/change_ssid_and_password"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="52dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/change_ssid_and_password_text"
                 app:layout_constraintTop_toBottomOf="@id/password_text_field"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="30dp"
-                tools:hint="Toggle Hotspot   "
         />
 
-        <TextView
-            android:layout_height="52dp"
-            android:layout_width="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/hotspot_switch"
-            android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Açık"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:textColor="@color/colorPrimary"
-            style="@style/TextAppearance.AppCompat.Caption"
+        <!-- Turn On -->
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/turn_hotspot_on"
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:text="@string/turn_hospot_on"
+                app:layout_constraintTop_toBottomOf="@id/change_ssid_and_password"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="50dp"
+        />
+
+        <!-- Turn Off -->
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/turn_hotspot_off"
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:text="@string/turn_hospot_off"
+                app:layout_constraintTop_toBottomOf="@id/change_ssid_and_password"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="50dp"
+                android:visibility="gone"
         />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

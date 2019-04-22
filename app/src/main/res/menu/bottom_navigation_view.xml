@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/home"
+    <item android:id="@+id/homePageFragment"
           android:title="@string/bottom_nav_title_home"
           android:icon="@drawable/ic_home"
           android:iconTint="@color/colorAccent"
     />
 
-    <item android:id="@+id/hotspot"
+    <item android:id="@+id/hotspotFragment"
           android:title="@string/bottom_nav_title_hotspot"
           android:icon="@drawable/ic_hotspot"
     />

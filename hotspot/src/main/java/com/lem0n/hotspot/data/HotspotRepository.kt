@@ -3,8 +3,10 @@ package com.lem0n.hotspot.data
 import android.content.Context
 import com.lem0n.hotspot.data.database.HotspotDatabase
 import com.lem0n.hotspot.data.database.entity.HotspotEntry
+import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
+import org.threeten.bp.Instant
 import timber.log.Timber
 
 class RepositoryException(val msg : String? = null) : Exception(msg)
@@ -45,5 +47,12 @@ class HotspotRepository(private val context : Context) : IHotspotRepository {
                 throw RepositoryException(e.message)
             }
         } ?: throw RepositoryException("ID can not be null")
+    }
+
+    override suspend fun newEntry(ssid: String?, password: String?, state: Boolean): Completable {
+        if (ssid == null) throw RepositoryException("SSID can not be null.")
+        val pass = if (password != null) password else ""
+        val newEntry = HotspotEntry(state, ssid, pass, Instant.now())
+        return hotspotDao.insert(newEntry)
     }
 }

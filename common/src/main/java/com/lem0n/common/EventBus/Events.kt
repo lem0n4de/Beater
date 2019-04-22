@@ -2,7 +2,7 @@ package com.lem0n.common.EventBus
 
 import android.bluetooth.BluetoothSocket
 
-sealed class Event
+abstract class Event
 class onListeningConnections : Event()
 data class onReceivedConnection(val string : String) : Event()
 class onConnectionSuccessful : Event()

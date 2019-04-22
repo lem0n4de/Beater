@@ -38,7 +38,8 @@ object ServerCommunicator : ICommunicator {
      * it silently fails.
      */
     override fun receive(byteArray: ByteArray, length: Int) {
-        Timber.i("Received signal.")
+        Timber.i("Received signal. $byteArray")
+        Timber.i(String(byteArray, 0, length, Charsets.UTF_8))
         if (lock != null && lockCount > 0) {
             receiverFunctionStore[lock!!]!!(byteArray, length, lockCount)
             lockCount -= 1
@@ -78,9 +79,11 @@ object ServerCommunicator : ICommunicator {
             throw UnauthorizedAction("Lock and the signal that is sent now is not the same.")
         }
         lock = null
+        lockCount = 0
     }
 
     fun registerReceiver(signal: UUID, block : ReceiverFunction) {
+        Timber.d("Registered a function.")
         receiverFunctionStore[signal] = block
     }
 }

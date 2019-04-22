@@ -141,12 +141,13 @@ class ServerService : Service() {
         private var buffer = ByteArray(1024)
 
         override fun run() {
-            var bytes: Int = 0
+            var bytes: Int
             Timber.d("Started ConnectedThread.")
             while (true) {
                 try {
+                    serverCommunicator.senderFunction = this@ConnectedThread::write
                     Timber.d("Waiting to read data from bluetooth.")
-                    bytes = inputStream.read()
+                    bytes = inputStream.read(buffer)
                     serverCommunicator.receive(buffer, bytes)
                 } catch (e: Exception) {
                     Timber.e(e, "Input stream disconnected.")

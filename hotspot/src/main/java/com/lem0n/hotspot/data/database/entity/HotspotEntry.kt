@@ -11,6 +11,8 @@ import org.threeten.bp.Instant
 @Entity(tableName = "hotspot")
 data class HotspotEntry(
     var remoteState : Boolean,
+    var ssid : String,
+    var password : String,
     var date: Instant
 ) {
     @PrimaryKey(autoGenerate = true)

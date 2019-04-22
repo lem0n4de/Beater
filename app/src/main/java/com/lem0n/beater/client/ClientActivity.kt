@@ -33,7 +33,7 @@ class ClientActivity : AppCompatActivity() {
         Intent(this, ClientService::class.java).also {
             startService(it)
         }
-        Timber.d("Started activity.")
+        Timber.d("Started service.")
     }
 
     override fun onSupportNavigateUp(): Boolean {

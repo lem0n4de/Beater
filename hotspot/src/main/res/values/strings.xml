@@ -2,4 +2,11 @@
     <string name="app_name">Hotspot</string>
     <string name="ssid_text_field_hint">SSID</string>
     <string name="password_text_field_hint">Password</string>
+    <string name="change_ssid_and_password_text">Change SSID or password</string>
+    <string name="hotspot_switch_hint">Toggle Hotspot</string>
+    <string name="hotspot_page_title">Hotspot</string>
+    <string name="change_dialog_positive_button">Change</string>
+    <string name="turn_hospot_on">Turn on hotspot</string>
+    <string name="turn_hospot_off">Turn off hotspot</string>
+    <string name="change_dialog_negative_button">Cancel</string>
 </resources>

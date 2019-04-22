@@ -62,6 +62,9 @@ dependencies {
     api(Libs.Kotlin.coroutines_core)
     api(Libs.Kotlin.coroutines_android)
 
+    api(Libs.AndroidX.lifecycle_viewmodel_livedata)
+    api(Libs.AndroidX.lifecycle_reactive_streams)
+
     testImplementation("junit:junit:4.12")
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
