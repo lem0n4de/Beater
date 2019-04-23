@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -30,13 +31,20 @@ class HotspotFragment : Fragment() {
         return inflater.inflate(R.layout.hotspot_fragment, container, false)
     }
 
+    private val SSID_KEY : String = "ssid_key"
+    private var ssid : String = ""
+    private val PASSWORD_KEY : String = "password_key"
+    private var password : String = ""
+    private val STATE_KEY : String = "state_key"
+    private var _state : Boolean = false
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         turn_hotspot_on.setOnClickListener {
             Timber.d("Pressed turn hotspot on button.")
-            val ssid = ssid_text_field.text.toString()
-            val pass = password_text_field.text.toString()
-            viewModel.turnHotspotOn(ssid, pass)
+            ssid = ssid_text_field.text.toString()
+            password = password_text_field.text.toString()
+            viewModel.turnHotspotOn(ssid, password)
         }
         turn_hotspot_off.setOnClickListener {
             Timber.d("Pressed turn hotspot off button.")
@@ -52,10 +60,12 @@ class HotspotFragment : Fragment() {
                 hotspot_state.text = "Açık"
                 turn_hotspot_on.visibility = View.GONE
                 turn_hotspot_off.visibility = View.VISIBLE
+                _state = true
             } else {
                 hotspot_state.text = "Kapalı"
                 turn_hotspot_on.visibility = View.VISIBLE
                 turn_hotspot_off.visibility = View.GONE
+                _state = false
             }
         })
 
@@ -86,5 +96,40 @@ class HotspotFragment : Fragment() {
             di.dismiss()
         })
         dialog.show()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        val hotspotSettings = context?.getSharedPreferences("HOTSPOT_PREFS", 0)
+        hotspotSettings?.edit {
+            putString(SSID_KEY, ssid)
+            putString(PASSWORD_KEY, password)
+            putBoolean(STATE_KEY, _state)
+        }
+        Timber.i("App state saved.")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Timber.i("Recovering state.")
+        val hotspotSettings = context?.getSharedPreferences("HOTSPOT_PREFS", 0)
+
+        val saved_ssid = hotspotSettings?.getString(SSID_KEY, "")!!
+        val saved_pass = hotspotSettings.getString(PASSWORD_KEY, "")
+        val saved_state = hotspotSettings.getBoolean(STATE_KEY, false)
+
+        ssid_text_field.text = saved_ssid
+        password_text_field.text = saved_pass
+        if (saved_state == true) {
+            hotspot_state.text = "Açık"
+            turn_hotspot_on.visibility = View.GONE
+            turn_hotspot_off.visibility = View.VISIBLE
+            _state = true
+        } else {
+            hotspot_state.text = "Kapalı"
+            turn_hotspot_on.visibility = View.VISIBLE
+            turn_hotspot_off.visibility = View.GONE
+            _state = false
+        }
     }
 }

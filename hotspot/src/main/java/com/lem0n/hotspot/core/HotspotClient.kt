@@ -5,8 +5,13 @@ import android.content.Context
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.communicators.ClientCommunicator
 import com.lem0n.hotspot.*
+import com.lem0n.hotspot.data.IHotspotRepository
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
+import org.koin.core.context.GlobalContext
 import org.koin.core.inject
 import timber.log.Timber
 
@@ -60,9 +65,9 @@ class HotspotClient(private val appContext: Context) : KoinComponent {
         val passwordBytearray = password.toByteArray()
 
         clientCommunicator.send(uuidBytearray)
-        Thread.sleep(1000L)
+        Thread.sleep(500L)
         clientCommunicator.send(ssidBytearray)
-        Thread.sleep(1000L)
+        Thread.sleep(500L)
         clientCommunicator.send(passwordBytearray)
     }
 

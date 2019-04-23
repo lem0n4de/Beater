@@ -1,6 +1,7 @@
 package com.lem0n.hotspot.data
 
 import android.content.Context
+import androidx.room.EmptyResultSetException
 import com.lem0n.hotspot.data.database.HotspotDatabase
 import com.lem0n.hotspot.data.database.entity.HotspotEntry
 import io.reactivex.Completable
@@ -53,6 +54,7 @@ class HotspotRepository(private val context : Context) : IHotspotRepository {
         if (ssid == null) throw RepositoryException("SSID can not be null.")
         val pass = if (password != null) password else ""
         val newEntry = HotspotEntry(state, ssid, pass, Instant.now())
+        Timber.i("Adding new entry.")
         return hotspotDao.insert(newEntry)
     }
 }

@@ -8,6 +8,7 @@ import com.lem0n.beater.R
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.EventBus.onListeningConnections
 import com.lem0n.common.EventBus.onReceivedConnection
+import com.lem0n.hotspot.HotspotLib
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_server.*
 import org.koin.android.ext.android.inject
@@ -19,6 +20,7 @@ class ServerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        HotspotLib.initServer(this)
         setContentView(R.layout.activity_server)
         setTitle(R.string.server_activity_title)
 

@@ -39,11 +39,12 @@ object ServerCommunicator : ICommunicator {
      */
     override fun receive(byteArray: ByteArray, length: Int) {
         Timber.i("Received signal. $byteArray")
-        Timber.i(String(byteArray, 0, length, Charsets.UTF_8))
+        Timber.i(String(byteArray, 0, length))
         if (lock != null && lockCount > 0) {
-            receiverFunctionStore[lock!!]!!(byteArray, length, lockCount)
+            val tmpLock = lockCount
             lockCount -= 1
-            Timber.i("Lock is present, sent data to according function. lockCount = $lockCount")
+            Timber.i("Lock is present, sending data to according function. lockCount = $tmpLock")
+            receiverFunctionStore[lock!!]!!(byteArray, length, tmpLock)
             return
         }
         val incomingSignal = UUID.fromString(String(byteArray, 0, length))

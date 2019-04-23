@@ -12,15 +12,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.inject
 import org.threeten.bp.Instant
+import timber.log.Timber
 
 
 @SuppressLint("CheckResult")
 class HotspotViewModel(
-    private val repo : HotspotRepository
+    private val repo: HotspotRepository
 ) : BaseViewModel() {
-    private val bus : IEventBus by inject()
+    private val bus: IEventBus by inject()
     val state = MutableLiveData<HotspotEntry>()
     val lastOperationDone = MutableLiveData<Boolean>()
+
+    private var _ssid: String = ""
+    private var _password: String = ""
 
     init {
         state.value = HotspotEntry(false, "DENEME", "deneme", Instant.now())
@@ -32,7 +36,8 @@ class HotspotViewModel(
     private fun initializeListeners() {
         bus.listen(onHotspotTurnedOn::class.java)
             .subscribe {
-                updateState()
+                saveSettings(_ssid, _password, true)
+                updateState(true)
                 endOperation()
             }
         bus.listen(onTurningOnFailed::class.java)
@@ -41,7 +46,8 @@ class HotspotViewModel(
             }
         bus.listen(onHotspotTurnedOff::class.java)
             .subscribe {
-                updateState()
+                saveSettings(_ssid, _password, false)
+                updateState(false)
                 endOperation()
             }
         bus.listen(onTurningOffFailed::class.java)
@@ -50,33 +56,44 @@ class HotspotViewModel(
             }
     }
 
-    private fun updateState() {
-        launch {
-            val _state = repo.getLastEntry()
-                .observeOn(Schedulers.io())
-                .blockingGet()
-            state.value = _state
-        }
+    private fun updateState(remoteState : Boolean) = launch(Dispatchers.IO) {
+//        repo.getLastEntry()
+//            .doOnSuccess {
+//                Timber.i("Updating state.")
+//                state.postValue(it)
+//            }
+//            .doOnError {
+//                Timber.wtf(it)
+//            }
+        val _state = HotspotEntry(remoteState, _ssid, _password, Instant.now())
+        state.postValue(_state)
     }
 
-    fun turnHotspotOn(ssid : String, password : String) {
+    fun turnHotspotOn(ssid: String, password: String) {
         startOperation()
-        saveSettings(ssid, password, true)
+        _ssid = ssid
+        _password = password
         bus.publish(onTurnHotspotOn(ssid, password))
     }
 
     fun turnHotspotOff() {
         startOperation()
-        saveSettings(state.value!!.ssid, state.value!!.password, false)
         bus.publish(onTurnHotspotOff())
     }
 
-    private fun saveSettings(ssid : String, password : String, state : Boolean) {
+    private fun saveSettings(ssid: String, password: String, state: Boolean) {
         launch(Dispatchers.IO) {
+            Timber.i("Adding new entry.")
             repo.newEntry(ssid, password, state)
+            Timber.i("Added new entry.")
         }
     }
 
-    private fun startOperation() { lastOperationDone.value = false }
-    private fun endOperation() { lastOperationDone.value = true }
+    private fun startOperation() {
+        lastOperationDone.postValue(false)
+    }
+
+    private fun endOperation() {
+        lastOperationDone.postValue(true)
+    }
 }

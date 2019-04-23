@@ -30,14 +30,27 @@ object HotspotLib : KoinComponent {
     private val serverCommunicator: ServerCommunicator by inject()
     private val clientCommunicator: ClientCommunicator by inject()
 
-    fun init(appContext: Context) {
-        val hotspotModule = module {
-            single<HotspotRepository> { HotspotRepository(appContext) }
-            viewModel<HotspotViewModel> { HotspotViewModel(get()) }
+    fun initServer(context : Context) {
+        try {
+            HotspotServer(context)
+            Timber.i("Initialized hotspot server.")
+        } catch (e: Exception) {
+            Timber.wtf(e)
         }
-        loadKoinModules(hotspotModule)
+    }
 
-        val hotspotServer = HotspotServer(appContext)
-        val hotspotClient = HotspotClient(appContext)
+    fun initClient(context : Context) {
+        try {
+            val hotspotModule = module {
+                single<HotspotRepository> { HotspotRepository(context) }
+                viewModel<HotspotViewModel> { HotspotViewModel(get()) }
+            }
+            loadKoinModules(hotspotModule)
+            val hotspotClient = HotspotClient(context)
+            Timber.i("Initialized hotspot client.")
+        } catch (e : Exception) {
+            Timber.e(e)
+        }
+
     }
 }

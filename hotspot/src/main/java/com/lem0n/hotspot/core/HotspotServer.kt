@@ -36,7 +36,10 @@ class HotspotServer(private val appContext: Context) : KoinComponent {
 
     fun enableHotspot(byteArray: ByteArray, length: Int, lockCount: Int) : Boolean {
         when (lockCount) {
-            0 -> serverCommunicator.lock(SignalContract.ENABLE_HOTSPOT, 2)
+            0 -> {
+                Timber.i("Locking receiving for 2 times.")
+                serverCommunicator.lock(SignalContract.ENABLE_HOTSPOT, 2)
+            }
             2 -> {
                 ssid = String(byteArray, 0, length)
                 Timber.d("SSID = $ssid")
@@ -56,6 +59,7 @@ class HotspotServer(private val appContext: Context) : KoinComponent {
                     serverCommunicator.unlock(SignalContract.ENABLE_HOTSPOT)
                     // Hotspot is ON.
                     serverCommunicator.send(SignalContract.ENABLE_HOTSPOT_SUCCESSFUL.toString().toByteArray())
+                    Timber.i("Sent message to client..")
                     bus.publish(onHotspotTurnedOn())
                     return true
                 } catch (e: Exception) {

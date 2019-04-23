@@ -32,6 +32,5 @@ class MainApplication : Application() {
             Timber.plant(Timber.DebugTree())
         }
         AndroidThreeTen.init(this)
-        HotspotLib.init(this@MainApplication)
     }
 }

@@ -6,6 +6,7 @@
         android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".ui.HotspotFragment">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -16,14 +17,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:visibility="gone">
+                android:backgroundDimEnabled="true"
+                android:background="@android:color/darker_gray"
+                android:visibility="invisible">
 
             <ProgressBar
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:indeterminate="true"
+                    android:backgroundDimEnabled="true"
+                    android:progressBackgroundTint="@android:color/black"
+                    style="@android:style/Widget.ProgressBar.Inverse"
             />
         </RelativeLayout>
+
         <!-- Status of hotspot -->
         <TextView
             android:id="@+id/hotspot_state"

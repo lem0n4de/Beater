@@ -20,13 +20,13 @@ class ConnectedThread(private val socket : BluetoothSocket) : Thread(), KoinComp
         while (true) {
             try {
                 bytes = inputStream.read(buffer)
+                clientCommunicator.receive(buffer, bytes)
             } catch (e : Exception) {
                 Timber.e(e, "Input stream was disconnected.")
                 cancel()
                 break
             }
         }
-        clientCommunicator.receive(buffer, bytes)
     }
 
     fun write(buffer : ByteArray) {

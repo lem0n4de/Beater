@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.lem0n.beater.R
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.EventBus.onConnectionFailed
+import com.lem0n.hotspot.HotspotLib
 import kotlinx.android.synthetic.main.activity_client.*
 import org.koin.android.ext.android.inject
 import timber.log.Timber
@@ -22,6 +23,7 @@ class ClientActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        HotspotLib.initClient(this)
         setContentView(R.layout.activity_client)
 
         navController = Navigation.findNavController(this, R.id.fragment_container)

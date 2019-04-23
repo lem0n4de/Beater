@@ -34,12 +34,16 @@ object ClientCommunicator : ICommunicator {
     override fun receive(byteArray: ByteArray, length: Int) {
         Timber.i("Received signal.")
         Timber.i(String(byteArray, 0, length))
-        val incomingSignal = UUID.fromString(String(byteArray))
-        if (receiverFunctionStore.containsKey(incomingSignal)) {
-            receiverFunctionStore[incomingSignal]!!(byteArray, length, 0)
-            Timber.i("A function found for the incoming signal.")
-        } else {
-            Timber.i("No function found for incoming signal.")
+        try {
+            val incomingSignal = UUID.fromString(String(byteArray, 0, length))
+            if (receiverFunctionStore.containsKey(incomingSignal)) {
+                receiverFunctionStore[incomingSignal]!!(byteArray, length, 0)
+                Timber.i("A function found for the incoming signal.")
+            } else {
+                Timber.i("No function found for incoming signal.")
+            }
+        } catch (e : Exception) {
+            Timber.wtf(e)
         }
     }
 
