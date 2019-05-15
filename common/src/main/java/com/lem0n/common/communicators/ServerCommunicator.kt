@@ -32,6 +32,14 @@ object ServerCommunicator : ICommunicator {
 
 
     /**
+     * Helper function to send UUID
+     */
+    fun send(uuid: UUID) {
+        return send(uuid.toString().toByteArray())
+    }
+
+
+    /**
      * A general function to fire receiver functions
      * according to incoming signals.
      * If no value(function) found for the signal,
