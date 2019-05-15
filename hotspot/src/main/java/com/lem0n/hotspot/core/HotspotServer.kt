@@ -32,6 +32,7 @@ class HotspotServer(private val appContext: Context) : KoinComponent {
         }
         serverCommunicator.registerReceiver(SignalContract.ENABLE_HOTSPOT, ::enableHotspot)
         serverCommunicator.registerReceiver(SignalContract.DISABLE_HOTSPOT, ::disableHotspot)
+        serverCommunicator.registerReceiver(SignalContract.CHECK_HOTSPOT, ::checkHotspot)
     }
 
     fun enableHotspot(byteArray: ByteArray, length: Int, lockCount: Int) : Boolean {
@@ -61,6 +62,7 @@ class HotspotServer(private val appContext: Context) : KoinComponent {
                     serverCommunicator.send(SignalContract.ENABLE_HOTSPOT_SUCCESSFUL.toString().toByteArray())
                     Timber.i("Sent message to client..")
                     bus.publish(onHotspotTurnedOn())
+
                     return true
                 } catch (e: Exception) {
                     Timber.e(e)
@@ -90,6 +92,26 @@ class HotspotServer(private val appContext: Context) : KoinComponent {
         } catch (e: Exception) {
             Timber.e(e)
             serverCommunicator.send(SignalContract.DISABLE_HOTSPOT_FAILED.toString().toByteArray())
+            return false
+        }
+    }
+
+    fun checkHotspot(byteArray: ByteArray, length: Int, lockCount: Int) : Boolean {
+        try {
+            val wifiManager = appContext.getSystemService(Context.WIFI_SERVICE)
+            val apState = wifiManager::class.java.getMethod("getWifiApState").invoke(wifiManager) as Int
+
+            if (apState > 13) {
+                Timber.i("Hotspot is already open.")
+                serverCommunicator.send(SignalContract.CHECK_HOTSPOT_ENABLED.toString().toByteArray())
+                return true
+            } else {
+                Timber.i("Hotspot is closed.")
+                serverCommunicator.send(SignalContract.CHECK_HOTSPOT_DISABLED.toString().toByteArray())
+                return true
+            }
+        } catch (e: Exception) {
+            Timber.e(e)
             return false
         }
     }

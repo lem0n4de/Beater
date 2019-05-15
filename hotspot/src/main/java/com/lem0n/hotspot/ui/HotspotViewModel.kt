@@ -57,16 +57,13 @@ class HotspotViewModel(
     }
 
     private fun updateState(remoteState : Boolean) = launch(Dispatchers.IO) {
-//        repo.getLastEntry()
-//            .doOnSuccess {
-//                Timber.i("Updating state.")
-//                state.postValue(it)
-//            }
-//            .doOnError {
-//                Timber.wtf(it)
-//            }
         val _state = HotspotEntry(remoteState, _ssid, _password, Instant.now())
         state.postValue(_state)
+    }
+
+    fun checkState() {
+        startOperation()
+        bus.publish(onCheckHotspot())
     }
 
     fun turnHotspotOn(ssid: String, password: String) {

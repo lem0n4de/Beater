@@ -16,18 +16,16 @@
                 android:id="@+id/loadingCircle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:backgroundDimEnabled="true"
-                android:background="@android:color/darker_gray"
+                android:gravity="top"
+                android:layout_marginTop="?android:attr/actionBarSize"
                 android:visibility="invisible">
 
             <ProgressBar
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:indeterminate="true"
-                    android:backgroundDimEnabled="true"
                     android:progressBackgroundTint="@android:color/black"
-                    style="@android:style/Widget.ProgressBar.Inverse"
+                    style="?android:attr/progressBarStyleHorizontal"
             />
         </RelativeLayout>
 

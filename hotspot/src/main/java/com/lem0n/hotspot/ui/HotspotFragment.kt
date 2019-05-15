@@ -74,6 +74,14 @@ class HotspotFragment : Fragment() {
         })
     }
 
+    private fun hotspotOnUi() {
+
+    }
+
+    private fun hotspotOffUi() {
+
+    }
+
     override fun onResume() {
         super.onResume()
         val ac = activity as AppCompatActivity

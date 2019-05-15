@@ -33,7 +33,11 @@ class HotspotClient(private val appContext: Context) : KoinComponent {
             .subscribe {
                 disableHotspot()
             }
-        compositeDisposable.addAll(hotspotOn, hotspotOff)
+        val checkHotspotState = bus.listen(onCheckHotspot::class.java)
+            .subscribe {
+                checkHotspot()
+            }
+        compositeDisposable.addAll(hotspotOn, hotspotOff, checkHotspotState)
 
         clientCommunicator.registerReceiver(SignalContract.ENABLE_HOTSPOT_SUCCESSFUL) { _, _, _ ->
             bus.publish(onHotspotTurnedOn())
@@ -51,7 +55,14 @@ class HotspotClient(private val appContext: Context) : KoinComponent {
             bus.publish(onTurningOffFailed())
             return@registerReceiver true
         }
-
+        clientCommunicator.registerReceiver(SignalContract.CHECK_HOTSPOT_ENABLED) { _, _, _ ->
+            bus.publish(onHotspotTurnedOn())
+            return@registerReceiver true
+        }
+        clientCommunicator.registerReceiver(SignalContract.CHECK_HOTSPOT_DISABLED) { _, _, _ ->
+            bus.publish(onHotspotTurnedOff())
+            return@registerReceiver true
+        }
     }
 
     private fun disableHotspot() {
@@ -69,6 +80,11 @@ class HotspotClient(private val appContext: Context) : KoinComponent {
         clientCommunicator.send(ssidBytearray)
         Thread.sleep(500L)
         clientCommunicator.send(passwordBytearray)
+    }
+
+    private fun checkHotspot() {
+        clientCommunicator.send(SignalContract.CHECK_HOTSPOT.toString().toByteArray())
+        Timber.i("Sent check hotspot message to server.")
     }
 
     fun onDestroy() {
