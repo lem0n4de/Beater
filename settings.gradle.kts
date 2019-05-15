@@ -1,1 +1,1 @@
-include(":app", ":common", ":hotspot")
+include(":app", ":common", ":hotspot", ":call")
