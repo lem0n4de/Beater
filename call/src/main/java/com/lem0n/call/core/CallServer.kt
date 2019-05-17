@@ -1,17 +1,16 @@
-package com.lem0n.call
+package com.lem0n.call.core
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import com.lem0n.call.SignalContract
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.communicators.ServerCommunicator
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
-import java.util.*
 
 /**
  * Created by lem0n on 12/05/19.

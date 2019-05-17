@@ -5,6 +5,7 @@ import com.lem0n.common.EventBus.Event
 /**
  * Created by lem0n on 16/05/19.
  */
-data class onCallPhone(val number: Int) : Event()
+data class onCallPhone(val number: String) : Event()
 class onPhoneCallSuccess : Event()
 class onPhoneCallFailure : Event()
+class onPhoneCallEnd : Event()

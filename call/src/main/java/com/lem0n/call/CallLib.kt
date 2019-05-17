@@ -1,8 +1,13 @@
 package com.lem0n.call
 
 import android.app.Activity
-import android.app.Application
 import android.content.Context
+import com.lem0n.call.core.CallClient
+import com.lem0n.call.core.CallServer
+import com.lem0n.call.ui.CallViewModel
+import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.dsl.module
 import timber.log.Timber
 
 /**
@@ -18,8 +23,14 @@ object CallLib {
             Timber.wtf(e)
         }
     }
+
+
     fun initClient(context : Context) {
         try {
+            val callModule = module {
+                viewModel<CallViewModel> { CallViewModel() }
+            }
+            loadKoinModules(callModule)
             CallClient(context)
         } catch (e: Exception) {
             Timber.wtf(e)

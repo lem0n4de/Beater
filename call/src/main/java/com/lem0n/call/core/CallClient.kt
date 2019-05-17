@@ -1,7 +1,11 @@
-package com.lem0n.call
+package com.lem0n.call.core
 
 import android.annotation.SuppressLint
 import android.content.Context
+import com.lem0n.call.SignalContract
+import com.lem0n.call.onCallPhone
+import com.lem0n.call.onPhoneCallFailure
+import com.lem0n.call.onPhoneCallSuccess
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.communicators.ClientCommunicator
 import io.reactivex.disposables.CompositeDisposable
@@ -26,19 +30,20 @@ class CallClient(context : Context) : KoinComponent {
 
         compositeDisposable.addAll(onCallPhone)
 
-        clientCommunicator.registerReceiver(SignalContract.SUCCESS) { _,_,_ ->
+        clientCommunicator.registerReceiver(SignalContract.SUCCESS) { _, _, _ ->
             bus.publish(onPhoneCallSuccess())
             return@registerReceiver true
         }
 
-        clientCommunicator.registerReceiver(SignalContract.FAILURE) { _,_,_ ->
+        clientCommunicator.registerReceiver(SignalContract.FAILURE) { _, _, _ ->
             bus.publish(onPhoneCallFailure())
             return@registerReceiver true
         }
     }
 
-    private fun callNumber(number : Number) {
+    private fun callNumber(number : String) {
         clientCommunicator.send(SignalContract.CALL_PHONE)
+        clientCommunicator.send(number.toByteArray())
         Timber.i("Sent $number to other device.")
     }
 
