@@ -55,13 +55,18 @@ object ServerCommunicator : ICommunicator {
             receiverFunctionStore[lock!!]!!(byteArray, length, tmpLock)
             return
         }
-        val incomingSignal = UUID.fromString(String(byteArray, 0, length))
-        if (receiverFunctionStore.containsKey(incomingSignal)) {
-            receiverFunctionStore[incomingSignal]!!(byteArray, length, lockCount)
-            Timber.i("A function found for the incoming signal.")
-        } else {
-            Timber.i("No function found for incoming signal.")
+        try {
+            val incomingSignal = UUID.fromString(String(byteArray, 0, length))
+            if (receiverFunctionStore.containsKey(incomingSignal)) {
+                receiverFunctionStore[incomingSignal]!!(byteArray, length, lockCount)
+                Timber.i("A function found for the incoming signal.")
+            } else {
+                Timber.i("No function found for incoming signal.")
+            }
+        } catch (e : Exception) {
+            Timber.wtf(e)
         }
+
     }
 
     /**
