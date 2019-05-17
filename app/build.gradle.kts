@@ -54,6 +54,7 @@ dependencies {
     // Local module dependencies
     implementation(project(":common"))
     implementation(project(":hotspot"))
+    implementation(project(":call"))
     implementation(Libs.AndroidX.navigation_fragment)
     implementation(Libs.AndroidX.navigation_ui)
 

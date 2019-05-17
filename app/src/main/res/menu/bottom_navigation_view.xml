@@ -12,7 +12,7 @@
           android:icon="@drawable/ic_hotspot"
     />
 
-    <item android:id="@+id/messages"
+    <item android:id="@+id/callFragment"
           android:title="@string/bottom_nav_title_messages"
           android:icon="@drawable/ic_messages"
     />

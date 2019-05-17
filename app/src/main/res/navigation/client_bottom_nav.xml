@@ -8,4 +8,5 @@
               android:label="home_page_fragment" tools:layout="@layout/home_page_fragment"/>
     <fragment android:id="@+id/hotspotFragment" android:name="com.lem0n.hotspot.ui.HotspotFragment"
               android:label="HotspotFragment"/>
+    <fragment android:id="@+id/callFragment" android:name="com.lem0n.call.ui.CallFragment" android:label="CallFragment"/>
 </navigation>

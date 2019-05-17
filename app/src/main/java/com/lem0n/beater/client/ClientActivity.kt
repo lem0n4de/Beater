@@ -9,6 +9,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.lem0n.beater.R
+import com.lem0n.call.CallLib
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.EventBus.onConnectionFailed
 import com.lem0n.hotspot.HotspotLib
@@ -24,6 +25,7 @@ class ClientActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         HotspotLib.initClient(this)
+        CallLib.initClient(this)
         setContentView(R.layout.activity_client)
 
         navController = Navigation.findNavController(this, R.id.fragment_container)
