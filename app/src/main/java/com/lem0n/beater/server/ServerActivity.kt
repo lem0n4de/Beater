@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.lem0n.beater.R
+import com.lem0n.call.initServer
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.EventBus.onListeningConnections
 import com.lem0n.common.EventBus.onReceivedConnection
@@ -21,6 +22,7 @@ class ServerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         HotspotLib.initServer(this)
+        initServer(this)
         setContentView(R.layout.activity_server)
         setTitle(R.string.server_activity_title)
 

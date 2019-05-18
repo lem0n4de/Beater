@@ -37,3 +37,11 @@ object CallLib {
         }
     }
 }
+
+fun initServer(context: Activity) {
+    try {
+        CallServer(context)
+    } catch (e: Exception) {
+        Timber.wtf(e)
+    }
+}
