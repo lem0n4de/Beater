@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.lem0n.call.onCallPhone
 import com.lem0n.call.onPhoneCallEnd
 import com.lem0n.call.onPhoneCallSuccess
+import com.lem0n.call.onPhoneCallFailure
 import com.lem0n.common.EventBus.IEventBus
 import com.lem0n.common.base.BaseViewModel
 import io.reactivex.disposables.CompositeDisposable
@@ -27,7 +28,7 @@ class CallViewModel : BaseViewModel() {
                 callState.postValue(CallState.CALL_STARTED)
             }
 
-        val d2 = bus.listen(onPhoneCallSuccess::class.java)
+        val d2 = bus.listen(onPhoneCallFailure::class.java)
             .subscribe {
                 callState.postValue(CallState.ERROR)
             }
