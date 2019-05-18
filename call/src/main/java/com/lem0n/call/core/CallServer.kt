@@ -44,10 +44,11 @@ class CallServer(private val context : Activity) : KoinComponent {
                 try {
                     val number = String(byteArray, 0, length)
                     val intent = Intent(Intent.ACTION_CALL)
-                    intent.data = Uri.parse("tel:" + number)
+                    intent.data = Uri.parse("tel:$number")
                     context.startActivity(intent)
                     serverCommunicator.send(SignalContract.SUCCESS)
                     serverCommunicator.unlock(SignalContract.CALL_PHONE)
+                    Timber.i("Number called.")
                     return true
                 } catch (e : Exception) {
                     Timber.wtf(e)
