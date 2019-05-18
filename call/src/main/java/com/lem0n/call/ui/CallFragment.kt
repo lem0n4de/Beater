@@ -47,7 +47,7 @@ class CallFragment : Fragment() {
                     showSnack("ERROR WHILE CALLING.")
                 }
                 else -> {
-                    showSnack("ERROR WHILE CALLING.")
+                    showSnack("Something else showed up.")
                 }
             }
         })
@@ -60,6 +60,6 @@ class CallFragment : Fragment() {
     }
 
     private fun showSnack(text : String) {
-        Snackbar.make(View(context), text, Snackbar.LENGTH_LONG).show()
+        Snackbar.make(call_button, text, Snackbar.LENGTH_LONG).show()
     }
 }
